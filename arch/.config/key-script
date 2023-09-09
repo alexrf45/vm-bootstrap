@@ -1,0 +1,11 @@
+Key-Type: 1
+Key-Length: 2048
+Subkey-Type: 1
+Subkey-Length: 2048
+Name-Real: f0nzy
+Name-Comment: docker, aws
+Name-Email: the_cyber_ram@pm.me
+Expire-Date: 1y
+%ask-passphrase
+
+
