@@ -64,7 +64,7 @@ cp -r .config/i3blocks ~/.config/ && chmod +x ~/.config/i3blocks/*
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
-sudo cp planets.jpg /usr/share/pixmaps/.
+sudo cp images/black-kali.jpg /usr/share/pixmaps/.
 
 sudo pacman -S python-requests
 
