@@ -10,8 +10,8 @@ sudo apt-get install -y tmux tmuxp pass \
 	ttf-anonymous-pro fonts-noto-mono fonts-noto-color-emoji \
 	cowsay btop curl fzf rofi rng-tools-debian xpdf
 
-curl -fsSL https://get.docker.com -o get-docker.sh &
-sh get-docker.sh
+curl -fsSL https://get.docker.com -o get-docker.sh &&
+	sh get-docker.sh
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -50,8 +50,6 @@ mkdir ~/.docker
 
 echo '{"experimental":"enabled"}' >.docker/config.json
 
-#PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash'
-
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -69,12 +67,12 @@ export GOPATH=$HOME/.local/projects/go
 
 chmod +x goinstall.sh && ./goinstall.sh
 
-mkdir ~/.logs
+mkdir -p $HOME/.logs
 
-mkdir ~/projects
+mkdir -p $HOME/projects
 
-mkdir ~/tools &&
-	cd tools &&
+mkdir -p $HOME/tools &&
+	cd $HOME/tools &&
 	wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt &&
 	git clone https://github.com/alexrf45/reverse-ssh.git &&
 	git clone https://github.com/alexrf45/bloodhound-dev.git &&
@@ -106,9 +104,9 @@ sudo apt update && sudo apt install terraform
 
 curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
-sudo echo 'deb http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list
+sudo echo 'deb http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
 
-sudo echo 'deb-src http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list
+sudo echo 'deb-src http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
 
 sudo apt-get update -y
 
@@ -280,10 +278,10 @@ unfurl_install
 subfinder_install
 notify_install
 
-cp hakrawler $HOME/.local/.
+cp ./hakrawler $HOME/.local/.
 
-cp jsleak $HOME/.local/.
+cp ./jsleak $HOME/.local/.
 
 chmod +x $HOME/.local/hakrawler && chmod +x $HOME/.local/jsleak
 
-cp recon.sh $HOME/.local/. && chmod +x $HOME/.local/recon.sh
+cp ./recon.sh $HOME/.local/. && chmod +x $HOME/.local/recon.sh
