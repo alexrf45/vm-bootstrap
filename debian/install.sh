@@ -104,6 +104,12 @@ sudo apt update && sudo apt install terraform
 
 curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
+wget -q -O - https://archive.kali.org/archive-key.asc | gpg --import
+
+gpg --keyserver hkp://keys.gnupg.net --recv-key 44C6513A8E4FB3D30875F758ED444FF07D8D0BF6
+
+gpg -a --export ED444FF07D8D0BF6 | sudo apt-key add -
+
 sudo echo 'deb http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
 
 sudo echo 'deb-src http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
@@ -112,7 +118,7 @@ sudo apt-get update -y
 
 base() {
 	sudo apt-get install -y python3-pip python3-virtualenv libpcap-dev \
-		djvulibre-bin $USER-themes
+		djvulibre-bin kali-themes
 }
 
 network() {
