@@ -110,6 +110,8 @@ mkdir ~/tools &&
 
 sudo usermod -aG docker $USER
 
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
 chsh $USER -s /usr/bin/zsh
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
