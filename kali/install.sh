@@ -4,9 +4,9 @@ sudo apt-get update -y
 
 echo -e "Installing base packages..."
 
-sudo apt-get install -y tmux tmuxp pass \
+sudo apt-get install -y curl tmux tmuxp pass \
 	flameshot feh i3 i3blocks i3status i3lock-fancy \
-	jq terminator zsh nano remmina rsync lxappearance ttf-anonymous-pro fonts-noto-mono fonts-noto-color-emoji \
+	jq terminator zsh nano remmina rsync lxappearance fonts-noto-mono fonts-noto-color-emoji \
 	cowsay btop curl fzf rofi rng-tools-debian xpdf papirus-icon-theme \
 	imagemagick libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev \
 	xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev \
@@ -41,8 +41,8 @@ mkdir -p $HOME/.config/terminator/plugins
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
 wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linux_amd64.zip \
-	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
-	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
+	-O $HOME/terraform-ls.zip && unzip $HOME/terraform-ls.zip && chmod +x $HOME/terraform-ls &&
+	mv $HOME/terraform-ls ~/.local/bin/. && rm $HOME/terraform-ls.zip
 
 wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.9.0.linux-amd64 &&
 	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
@@ -97,10 +97,10 @@ curl -fsSL https://get.pulumi.com | sh
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -O terraform.zip &&
-	unzip terraform.zip && chmod +x terraform && mv terraform $HOME/.local/bin/terraform
+wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -O $HOME/terraform.zip &&
+	unzip $HOME/terraform.zip && chmod +x $HOME/terraform && mv $HOME/terraform $HOME/.local/bin/terraform
 
-curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+#curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
 sudo apt-get update -y
 
