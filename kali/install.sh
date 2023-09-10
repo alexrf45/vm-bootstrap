@@ -6,9 +6,12 @@ echo -e "Installing base packages..."
 
 sudo apt-get install -y tmux tmuxp pass \
 	flameshot feh i3 i3blocks i3status i3lock-fancy \
-	jq terminator zsh nano remmina rsync \
-	ttf-anonymous-pro fonts-noto-mono fonts-noto-color-emoji \
-	cowsay btop curl fzf rofi rng-tools-debian xpdf
+	jq terminator zsh nano remmina rsync lxappearance ttf-anonymous-pro fonts-noto-mono fonts-noto-color-emoji \
+	cowsay btop curl fzf rofi rng-tools-debian xpdf papirus-icon-theme \
+	imagemagick libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev \
+	xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev \
+	libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev \
+	libxcb-xrm0 libxcb-xrm-dev autoconf meson libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
 curl -fsSL https://get.docker.com -o get-docker.sh &&
 	sh get-docker.sh
@@ -50,13 +53,11 @@ mkdir ~/.docker
 
 echo '{"experimental":"enabled"}' >.docker/config.json
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 
 chmod u+x nvim.appimage && mv nvim.appimage ~/.local/nvim.appimage
 
-mv ~/.config/nvim ~/.config/nvim.bak
+#mv ~/.config/nvim ~/.config/nvim.bak
 
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 
@@ -101,21 +102,11 @@ wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.
 
 curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
-wget -q -O - https://archive.kali.org/archive-key.asc | gpg --import
-
-gpg --keyserver hkp://keys.gnupg.net --recv-key 44C6513A8E4FB3D30875F758ED444FF07D8D0BF6
-
-gpg -a --export ED444FF07D8D0BF6 | sudo apt-key add -
-
-sudo echo 'deb http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
-
-sudo echo 'deb-src http://http.kali.org/kali kali-rolling main non-free contrib' >>/etc/apt/sources.list.d/kali.list
-
 sudo apt-get update -y
 
 base() {
 	sudo apt-get install -y python3-pip python3-virtualenv libpcap-dev \
-		djvulibre-bin kali-themes
+		djvulibre-bin
 }
 
 network() {
