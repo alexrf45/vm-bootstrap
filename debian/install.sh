@@ -41,8 +41,8 @@ wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linu
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
-wget https://github.com/docker/docker-credential-helpers/releases/download/v0.7.0/docker-credential-pass-v0.7.0.linux-amd64 &&
-	mv docker-credential-pass-v0.7.0.linux-amd64 docker-credential-pass &&
+wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.9.0.linux-amd64 &&
+	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
 	sudo mv docker-credential-pass /usr/local/bin
 
@@ -96,11 +96,8 @@ curl -fsSL https://get.pulumi.com | sh
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-
-sudo apt update && sudo apt install terraform
+wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -O terraform.zip &&
+	unzip terraform.zip && chmod +x terraform && mv terraform $HOME/.local/bin/terraform
 
 curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 

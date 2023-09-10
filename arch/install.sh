@@ -82,8 +82,8 @@ wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linu
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
-wget https://github.com/docker/docker-credential-helpers/releases/download/v0.7.0/docker-credential-pass-v0.7.0.linux-amd64 &&
-	mv docker-credential-pass-v0.7.0.linux-amd64 docker-credential-pass &&
+wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.8.0.linux-amd64 &&
+	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
 	sudo mv docker-credential-pass /usr/local/bin
 
