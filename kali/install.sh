@@ -61,8 +61,8 @@ wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes
 # 	-O $HOME/terraform-ls.zip && unzip $HOME/terraform-ls.zip && chmod +x $HOME/terraform-ls &&
 # 	mv $HOME/terraform-ls ~/.local/bin/. && rm $HOME/terraform-ls.zip
 #
-wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.9.0.linux-amd64 &&
-	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
+wget https://github.com/docker/docker-credential-helpers/releases/download/v0.9.0/docker-credential-pass-v0.9.0.linux-amd64 &&
+	mv docker-credential-pass-v0.9.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
 	sudo mv docker-credential-pass /usr/local/bin
 
