@@ -4,7 +4,7 @@ sudo apt-get update -y
 
 echo -e "Installing base packages..."
 
-sudo apt-get install -y curl tmux tmuxp pass \
+sudo apt-get install -y docker.io curl tmux tmuxp pass \
 	flameshot feh i3 i3blocks i3status i3lock-fancy \
 	jq terminator zsh nano remmina rsync lxappearance fonts-noto-mono fonts-noto-color-emoji \
 	cowsay btop curl fzf rofi rng-tools-debian xpdf papirus-icon-theme \
@@ -13,8 +13,13 @@ sudo apt-get install -y curl tmux tmuxp pass \
 	libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev \
 	libxcb-xrm0 libxcb-xrm-dev autoconf meson libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
-curl -fsSL https://get.docker.com -o get-docker.sh &&
-	sh get-docker.sh
+# curl -fsSL https://get.docker.com -o get-docker.sh &&
+# 	sh get-docker.sh
+#
+
+sudo systemctl enable docker --now
+
+sudo usermod -aG docker $USER
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -52,28 +57,28 @@ mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
-wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linux_amd64.zip \
-	-O $HOME/terraform-ls.zip && unzip $HOME/terraform-ls.zip && chmod +x $HOME/terraform-ls &&
-	mv $HOME/terraform-ls ~/.local/bin/. && rm $HOME/terraform-ls.zip
-
+# wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linux_amd64.zip \
+# 	-O $HOME/terraform-ls.zip && unzip $HOME/terraform-ls.zip && chmod +x $HOME/terraform-ls &&
+# 	mv $HOME/terraform-ls ~/.local/bin/. && rm $HOME/terraform-ls.zip
+#
 wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.9.0.linux-amd64 &&
 	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
 	sudo mv docker-credential-pass /usr/local/bin
 
-mkdir ~/.docker
+mkdir $HOME/.docker
 
-echo '{"experimental":"enabled"}' >.docker/config.json
+echo '{"experimental":"enabled"}' >$HOME/.docker/config.json
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 
-chmod u+x nvim.appimage && mv nvim.appimage ~/.local/nvim.appimage
+chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/nvim.appimage
 
 #mv ~/.config/nvim ~/.config/nvim.bak
 
-git clone https://github.com/LazyVim/starter ~/.config/nvim
+git clone https://github.com/LazyVim/starter $HOME/.config/nvim
 
-rm -rf ~/.config/nvim/.git
+rm -rf $HOME/.config/nvim/.git
 
 export GOROOT=~/.local/go
 export GOPATH=$HOME/.local/projects/go
@@ -91,8 +96,6 @@ mkdir -p $HOME/tools &&
 	git clone https://github.com/alexrf45/bloodhound-dev.git &&
 	git clone https://github.com/alexrf45/Prox-Tor.git
 
-sudo usermod -aG docker $USER
-
 # TODO: set up repo for debian config
 #
 echo ".cfg" >>~/.gitignore
@@ -109,9 +112,9 @@ curl -fsSL https://get.pulumi.com | sh
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -O $HOME/terraform.zip &&
-	unzip $HOME/terraform.zip && chmod +x $HOME/terraform && mv $HOME/terraform $HOME/.local/bin/terraform
-
+# wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -O $HOME/terraform.zip &&
+# 	unzip $HOME/terraform.zip && chmod +x $HOME/terraform && mv $HOME/terraform $HOME/.local/bin/terraform
+#
 #curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
 sudo apt-get update -y
