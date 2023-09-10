@@ -36,6 +36,18 @@ aws-install() {
 
 aws-install
 
+mkdir -p ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/RobotoMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip
+
+unzip Iosevka.zip -d ~/.local/share/fonts/
+unzip RobotoMono.zip -d ~/.local/share/fonts/
+unzip FiraCode.zip -d ~/.local/share/fonts/
+
+fc-cache -fv
+
 mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
