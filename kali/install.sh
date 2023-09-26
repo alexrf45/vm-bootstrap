@@ -1,21 +1,17 @@
 #!/bin/bash
 
-sudo apt-get update -y
+sudo apt-get update && sudo apt upgrade -y
 
 echo -e "Installing base packages..."
 
 sudo apt-get install -y docker.io curl tmux tmuxp pass \
-	flameshot feh i3 i3blocks i3status i3lock-fancy \
+	flameshot feh i3 i3-wm i3blocks i3status i3lock-fancy arc-theme \
 	jq terminator zsh nano remmina rsync lxappearance fonts-noto-mono fonts-noto-color-emoji \
 	cowsay btop curl fzf rofi rng-tools-debian xpdf papirus-icon-theme \
 	imagemagick libxcb-shape0-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev \
 	xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev \
 	libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev \
 	libxcb-xrm0 libxcb-xrm-dev autoconf meson libxcb-render-util0-dev libxcb-shape0-dev libxcb-xfixes0-dev
-
-# curl -fsSL https://get.docker.com -o get-docker.sh &&
-# 	sh get-docker.sh
-#
 
 sudo systemctl enable docker --now
 
@@ -72,7 +68,7 @@ echo '{"experimental":"enabled"}' >$HOME/.docker/config.json
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 
-chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/nvim.appimage
+chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/nvim
 
 #mv ~/.config/nvim ~/.config/nvim.bak
 
@@ -80,10 +76,10 @@ git clone https://github.com/LazyVim/starter $HOME/.config/nvim
 
 rm -rf $HOME/.config/nvim/.git
 
-export GOROOT=~/.local/go
-export GOPATH=$HOME/.local/projects/go
-
-chmod +x goinstall.sh && ./goinstall.sh
+# export GOROOT=~/.local/go
+# export GOPATH=$HOME/.local/projects/go
+#
+# chmod +x goinstall.sh && ./goinstall.sh
 
 mkdir -p $HOME/.logs
 
@@ -100,7 +96,7 @@ mkdir -p $HOME/tools &&
 #
 echo ".cfg" >>~/.gitignore
 
-git clone --bare https://github.com/alexrf45/dotfiles.git $HOME/.cfg
+git clone --bare https://github.com/alexrf45/debian-dotfiles.git $HOME/.cfg
 
 alias dot='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -120,29 +116,28 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 sudo apt-get update -y
 
 base() {
-	sudo apt-get install -y python3-pip python3-virtualenv libpcap-dev \
-		djvulibre-bin
+	sudo apt-get install -y wget curl man git zsh \
+		tmux ruby ruby-dev vim nano p7zip-full kali-themes \
+		djvulibre-bin python3-pip python3-virtualenv libpcap-dev jq \
+		firefox-esr xpdf tmuxp man-db exploitdb
 }
 
 network() {
 	sudo apt-get install -y netcat-traditional socat rlwrap nmap \
 		netdiscover masscan dnsutils onesixtyone braa tcpdump \
 		ftp telnet swaks snmpcheck snmpcheck snmp-mibs-downloader \
-		iputils-ping iproute2 proxychains sendmail
+		iputils-ping iproute2 proxychains sendmail ltrace
 }
 
-active_directory() {
+active_directory_1() {
 	sudo apt-get install -y \
 		smbclient smbmap evil-winrm bloodhound responder \
 		powershell ldap-utils
 }
 
-echo -e "Installing base packages"
 base
-echo -e "Installing network packages"
 network
-echo -e "Installing AD tools"
-active_directory
+active_directory_1
 
 web() {
 	sudo apt-get install -y whatweb ffuf sqlmap \
@@ -154,17 +149,27 @@ password() {
 	sudo apt-get install -y seclists crunch
 }
 
+install_go() {
+	wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz &&
+		rm -rf /usr/local/go &&
+		sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz &&
+		rm go1.21.1.linux-amd64.tar.gz
+}
+
+#make sure dependency for go works
+install_go
+
 httpx_install() {
-	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.4/httpx_1.3.4_linux_amd64.zip &&
-		unzip httpx_1.3.4_linux_amd64.zip -d ./httpx &&
-		rm httpx_1.3.4_linux_amd64.zip &&
-		mv httpx/httpx /home/$USER/.local/http-x &&
+	wget -q https://github.com/projectdiscovery/httpx/releases/download/v1.3.5/httpx_1.3.5_linux_amd64.zip &&
+		unzip httpx_1.3.5_linux_amd64.zip -d ./httpx &&
+		rm httpx_1.3.5_linux_amd64.zip &&
+		mv httpx/httpx /home/kali/.local/http-x &&
 		rm -r httpx/
 
 }
 
 payload() {
-	cd /home/$USER/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O nc.exe \
 			"https://github.com/ShutdownRepo/Exegol-resources/raw/main/windows/nc.exe" &&
 		wget -q -O nc \
@@ -172,17 +177,17 @@ payload() {
 }
 
 active_directory() {
-	cd /home/$USER/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O rubeus.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
 		wget -q -O certify.exe \
 			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe" &&
 		wget -q -O cme.zip \
 			"https://github.com/Porchetta-Industries/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.11.zip" &&
-		unzip cme.zip && chmod +x cme && sudo mv cme /home/$USER/.local/cme && rm cme.zip &&
+		unzip cme.zip && chmod +x cme && sudo mv cme /home/kali/.local/cme && rm cme.zip &&
 		wget "https://github.com/fortra/impacket/releases/download/impacket_0_11_0/impacket-0.11.0.tar.gz" &&
 		gunzip impacket-0.11.0.tar.gz && tar -xvf impacket-0.11.0.tar &&
-		mv impacket-0.11.0/ /home/$USER/.local/ && rm impacket-0.11.0.tar &&
+		mv impacket-0.11.0/ /home/kali/.local/ && rm impacket-0.11.0.tar &&
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O SharpHound.exe \
@@ -190,23 +195,25 @@ active_directory() {
 }
 
 pivot() {
-	cd /home/$USER/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_linux_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_linux_amd64.gz" &&
 		gunzip chisel.gz &&
 		wget -q -O win-chisel.gz \
-			"https://github.com/jpillora/chisel/releases/download/v1.8.1/chisel_1.8.1_windows_amd64.gz" &&
+			"https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_windows_amd64.gz" &&
 		gunzip win-chisel.gz
 }
 
 privesc() {
-	cd /home/$USER/tools/ &&
+	cd $HOME/tools/ &&
 		wget -q -O linpeas.sh \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230813-dc8384b3/linpeas_linux_amd64" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/linpeas_linux_amd64" &&
 		wget -q -O winpeas.exe \
-			"https://github.com/carlospolop/PEASS-ng/releases/download/20230813-dc8384b3/winPEASany.exe" &&
+			"https://github.com/carlospolop/PEASS-ng/releases/download/20230910-ae32193f/winPEASany.exe" &&
+		wget -q -O pspys \
+			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s" &&
 		wget -q -O pspy \
-			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64s"
+			"https://github.com/DominicBreuker/pspy/releases/download/v1.2.1/pspy64"
 }
 
 echo -e "Installing tools..."
@@ -264,7 +271,7 @@ unfurl_install() {
 }
 
 subfinder_install() {
-	wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.2/subfinder_2.6.2_linux_amd64.zip \
+	wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.3/subfinder_2.6.3_linux_amd64.zip \
 		-O subfinder.zip && unzip subfinder.zip && chmod +x subfinder && mv subfinder $HOME/.local/subfinder && rm subfinder.zip
 }
 
@@ -273,7 +280,6 @@ notify_install() {
 		-O notify.zip && unzip -o notify && mv notify $HOME/.local/notify && rm notify.zip && rm LICENSE.md README.md
 }
 
-echo -e "Installing Bug Bounty Tools"
 sudo apt-get install amass -y
 
 httprobe_install
@@ -286,11 +292,3 @@ waybackurls_install
 unfurl_install
 subfinder_install
 notify_install
-
-cp ./hakrawler $HOME/.local/.
-
-cp ./jsleak $HOME/.local/.
-
-chmod +x $HOME/.local/hakrawler && chmod +x $HOME/.local/jsleak
-
-cp ./recon.sh $HOME/.local/. && chmod +x $HOME/.local/recon.sh
