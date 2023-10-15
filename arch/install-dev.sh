@@ -99,11 +99,8 @@ rm -rf ~/.config/nvim/.git
 
 mkdir ~/.logs
 
-mkdir ~/projects
-
-mkdir ~/tools &&
-	cd tools &&
-	wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt &&
+mkdir ~/projects &&
+	cd projects &&
 	git clone https://github.com/alexrf45/reverse-ssh.git &&
 	git clone https://github.com/alexrf45/bloodhound-dev.git &&
 	git clone https://github.com/alexrf45/Prox-Tor.git
