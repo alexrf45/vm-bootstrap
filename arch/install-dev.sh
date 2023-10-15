@@ -113,6 +113,8 @@ curl -sS https://starship.rs/install.sh | sh
 
 echo 'eval "$(starship init zsh)"' >>$HOME/.zshrc
 
+cp starship.toml $HOME/.config/starship.toml
+
 chsh $USER -s /usr/bin/zsh
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
