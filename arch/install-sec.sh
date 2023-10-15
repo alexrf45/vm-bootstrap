@@ -2,23 +2,21 @@
 
 echo -e "Installing base packages..."
 
-sudo pacman -S lightdm lightdm-gtk-greeter lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
-	feh man-pages man-db firefox flameshot gtk-theme-elementary gtkmm3 arc-gtk-theme network-manager-applet \
-	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools papirus-icon-theme picom rofi thunar xterm xsel \
-	speech-dispatcher base-devel intel-media-driver pass pipewire-pulse pacman-contrib
-echo -e " install terminal tools"
-
-sudo pacman -S tmux tmuxp terminator zsh neovim gzip btop unzip sysstat wget cowsay \
-	rsync lolcat figlet fzf rng-tools jq nano neofetch remmina p7zip proxychains-ng upx
-
-echo -e "installing development tools"
-
-sudo pacman -S docker docker-compose docker-buildx python python-pip python-virtualenv \
-	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian
-
-echo -e "installing fonts"
-
-sudo pacman -S ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
+sudo pacman -S lightdm lightdm-gtk-greeter \
+	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
+	feh man-pages man-db firefox flameshot gtk-theme-elementary \
+	gtkmm3 arc-gtk-theme network-manager-applet \
+	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools \
+	papirus-icon-theme picom rofi thunar xterm xsel \
+	speech-dispatcher base-devel intel-media-driver \
+	pass pipewire-pulse pacman-contrib \
+	tmux tmuxp terminator zsh lazygit \
+	neovim gzip btop unzip sysstat wget cowsay \
+	rsync lolcat figlet fzf rng-tools jq nano neofetch remmina p7zip \
+	proxychains-ng upx tealdeer docker docker-compose \
+	docker-buildx python python-pip python-virtualenv python-requests \
+	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
+	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
 echo ".cfg" >>~/.gitignore
 
@@ -64,9 +62,7 @@ cp -r .config/i3blocks ~/.config/ && chmod +x ~/.config/i3blocks/*
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
-sudo cp images/black-kali.jpg /usr/share/pixmaps/.
-
-sudo pacman -S python-requests
+sudo cp images/planets.jpg /usr/share/pixmaps/.
 
 mkdir -p $HOME/.config/terminator/plugins
 
@@ -78,7 +74,7 @@ cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && mak
 
 cd $HOME
 
-wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linux_amd64.zip \
+wget https://releases.hashicorp.com/terraform-ls/0.32.2/terraform-ls_0.32.2_linux_amd64.zip \
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
