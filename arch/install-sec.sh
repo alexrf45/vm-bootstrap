@@ -20,7 +20,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 
 echo ".cfg" >>~/.gitignore
 
-git clone --bare https://github.com/alexrf45/dotfiles.git $HOME/.cfg
+git clone --bare https://github.com/alexrf45/security_dot_files.git $HOME/.cfg
 
 alias sec='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
