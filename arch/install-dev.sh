@@ -8,7 +8,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	gtkmm3 arc-gtk-theme network-manager-applet \
 	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi thunar xterm xsel \
-	speech-dispatcher base-devel intel-media-driver \
+	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit \
 	neovim gzip btop unzip sysstat wget cowsay \
