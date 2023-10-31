@@ -18,6 +18,8 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
 	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
+mkdir -p $HOME/.local/bin
+
 echo ".cfg" >>~/.gitignore
 
 git clone --bare https://github.com/alexrf45/dotfiles.git $HOME/.cfg
@@ -34,6 +36,8 @@ curl \
 	-o $HOME/.zsh/plugins/miniplug.zsh
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+git clone https://github.com/jonmosco/kube-tmux.git ~/.tmux/plugins/kube-tmux
 
 mkdir $HOME/.ssh
 
