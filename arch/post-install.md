@@ -12,15 +12,9 @@ pass init $SECRET_KEY
 
 pass insert docker-credential-helpers/docker-pass-initialized-check
 
-install rust binaries
-❯ cargo install --list 
-bat v0.24.0:
-    bat
-du-dust v0.8.6:
-    dust
-speedtest-rs v0.1.4:
-    speedtest-rs
 
-yay -s rate-mirrors 
+yay -s rate-mirrors
+
+cargo install bat du-dust lsd miniserver speedtest-rs
 
 ```
