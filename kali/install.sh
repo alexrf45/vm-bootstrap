@@ -53,12 +53,12 @@ mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
-wget https://releases.hashicorp.com/terraform-ls/0.31.4/terraform-ls_0.31.4_linux_amd64.zip \
+wget https://releases.hashicorp.com/terraform-ls/0.32.2/terraform-ls_0.32.2_linux_amd64.zip \
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls $HOME/.local/bin/. && rm terraform-ls.zip
 
-wget https://github.com/docker/docker-credential-helpers/releases/download/v0.9.0/docker-credential-pass-v0.9.0.linux-amd64 &&
-	mv docker-credential-pass-v0.9.0.linux-amd64 docker-credential-pass &&
+wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.8.0.linux-amd64 &&
+	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
 	sudo mv docker-credential-pass /usr/local/bin
 
