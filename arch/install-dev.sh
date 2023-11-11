@@ -10,7 +10,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	papirus-icon-theme picom rofi thunar xterm xsel \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
-	tmux tmuxp terminator zsh lazygit lsd \
+	tmux tmuxp terminator zsh lazygit lsd ranger \
 	neovim gzip btop unzip sysstat wget cowsay \
 	rsync lolcat figlet fzf rng-tools jq yq nano neofetch remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
