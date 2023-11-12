@@ -6,7 +6,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
 	feh man-pages man-db firefox flameshot gtk-theme-elementary \
 	gtkmm3 arc-gtk-theme network-manager-applet \
-	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools \
+	networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi thunar xterm xsel gvfs \
 	speech-dispatcher base-devel intel-media-driver \
 	pass pipewire-pulse pacman-contrib \
@@ -53,6 +53,10 @@ aws-install() {
 
 aws-install
 
+mkdir -p $HOME/.config/rofi
+
+wget https://github.com/w8ste/Tokyonight-rofi-theme/raw/main/tokyonight.rasi -O $HOME/.config/rofi/tokyonight.rasi
+
 sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 	sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
 
@@ -69,6 +73,8 @@ mkdir -p $HOME/.config/terminator/plugins
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
 cp .config/terminator/config ~/.config/terminator/.
+
+sudo cp pacman.conf /etc/pacman.conf
 
 cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && makepkg -si && sudo rm -r yay-git
 
@@ -110,7 +116,7 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -sS https://starship.rs/install.sh | sh
 
-echo 'eval "$(starship init zsh)"' >>$HOME/.zshrc
+yay -S burpsuite
 
 chsh $USER -s /usr/bin/zsh
 
