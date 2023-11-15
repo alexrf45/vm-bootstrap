@@ -11,7 +11,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	speech-dispatcher base-devel intel-media-driver \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit \
-	neovim gzip btop unzip sysstat wget cowsay \
+	helix gzip btop unzip sysstat wget cowsay \
 	rsync lolcat figlet fzf rng-tools jq nano neofetch remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
