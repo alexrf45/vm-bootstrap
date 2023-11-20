@@ -1,6 +1,15 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Use custom format
+format = """
+ $time
+ $directory$git_branch $git_commit $git_status $python
+ $aws $azure $terraform $kubernetes $pulumi $line_break 
+ > """
+
+#right_format = '$aws $terraform'
+
 # Wait 10 milliseconds for starship to check files under the current directory.
 scan_timeout = 5
 
@@ -10,59 +19,20 @@ add_newline = true
 [line_break]
 disabled = false
 
-# Sets user-defined palette
-palette = "catppuccin_macchiato"
-
-[character]
-# Note the use of Catppuccin color 'maroon'
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
-
-
-[custom.docker]
-description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.yml files"
-command = "echo 🐳"
-files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
-when = """ command -v docker &> /dev/null; exit (echo $?); """
-
-[custom.git_status]
-command = '''bash -c "
-# Untracked or Deleted files - Red
-if git status --porcelain | grep -qe '^?? ' -e '^[MARCDU ]D ' -e '^D[ UM]'; then
-    echo -n $'\e[31m●'
-fi
-
-# Modified (unstaged) and Renamed files - Yellow
-if git status --porcelain | grep -qe '^[ MARC]M ' -e '^R[ MD] '; then
-    echo -n $'\e[33m●'
-fi
-
-# Staged files - Green
-if git status --porcelain | grep -qe '^A[ MDAU] ' -e '^M[ MD] ' -e '^UA'; then
-    echo -n $'\e[32m●'
-fi"'''
-when = 'git rev-parse --is-inside-work-tree >/dev/null 2>&1'
-format = '( $output)'
-
-[custom.tztime]
-command = 'date +"%a %b %d %Y %T"'
-when = "true"
-format = ' [\[🕙 $symbol($output)\]]($style)'
-style= "italic white"
-disabled = true
-
 [python]
 symbol = "👾 "
 pyenv_version_name = true
+style = "#FF5555"
 
 [aws]
-format = '[$symbol ($profile )(\($region\) )]($style)'
-style = "#bf5700"
-symbol = "☁️ "
+format = '[$symbol  ($profile )(\($region\) )]($style)'
+style = "#FFB86C"
+symbol = "☁️"
 [aws.region_aliases]
-us-east-1 = "us-east-1"
+us-east-1 = "va"
 [aws.profile_aliases]
 Admin = 'Administrator'
+acct-admin= 'account-admin'
 
 [gcloud]
 disabled = false
@@ -71,48 +41,30 @@ style = "#FEFB61"
 symbol = ""
 
 [time]
-disabled = true
-style = "bold purple"
-format = "$time($style) "
-time_format = "%T"
-utc_time_offset = "-5"
-
-[username]
-style_user = "green bold"
-style_root = "red bold"
-format = " [$user]($style) "
-disabled = true
-show_always = true
+disabled = false
+format = "🗓  [$time]($style) "
+style = "#F1FA8C"
+use_12hr = false
+time_format = "%Y/%m/%d %T"
+utc_time_offset = "+9"
+time_range="-"  # always: time_range="00:00:00-23:59:59"
 
 [directory]
 read_only = " "
-truncation_length = 3
+truncation_length = 2
 truncate_to_repo = true # truncates directory to root folder if in github repo
-style = "bold lavender"
+style = "#8BE9FD"
 
-# [git_branch]
-# format = " [$symbol $branch]($style) "
-# symbol = "🪵 "
-# style = "bold yellow"
-#
-# [git_status]
-# conflicted = "⚔️ "
-# ahead = "🏎️ 💨 ×${count}"
-# behind = "🐢 ×${count}"
-# diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
-# untracked = "🛤️  ×${count}"
-# stashed = "📦 "
-# modified = "📜 ×${count} "
-# staged = "🗃️  ×${count} "
-# renamed = "📛 ×${count}"
-# deleted = "🗑️  ×${count}"
-# style = "bright-white"
-# format = "$all_status$ahead_behind"
-#
-# [git_commit]
-# commit_hash_length = 8
-# style = "bold white"
-#
+[git_branch]
+format = " [$symbol $branch]($style) "
+symbol = "🌳"
+style = "#FF79C6"
+
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
 [pulumi]
 symbol = "⚙️ "
 format = " [$symbol $stack]($style)"
@@ -120,130 +72,15 @@ style = "bright-purple"
 disabled = false
 
 [terraform]
-format = " [🏎💨 $version $workspace]($style) "
+format = " [ 󱁢 $version $workspace]($style) "
+style = "#BD93F9"
 
 [kubernetes]
 format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
 disabled = false
 
 [azure]
-disabled = false
+disabled = true
 format = "on [$symbol($subscription)]($style) "
 symbol = "ﴃ "
 style = "blue bold"
-
-
-
-
-# palette tables should be last in the config ⚓️
-[palettes.catppuccin_macchiato]
-rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
-
-[palettes.catppuccin_frappe]
-rosewater = "#f2d5cf"
-flamingo = "#eebebe"
-pink = "#f4b8e4"
-mauve = "#ca9ee6"
-red = "#e78284"
-maroon = "#ea999c"
-peach = "#ef9f76"
-yellow = "#e5c890"
-green = "#a6d189"
-teal = "#81c8be"
-sky = "#99d1db"
-sapphire = "#85c1dc"
-blue = "#8caaee"
-lavender = "#babbf1"
-text = "#c6d0f5"
-subtext1 = "#b5bfe2"
-subtext0 = "#a5adce"
-overlay2 = "#949cbb"
-overlay1 = "#838ba7"
-overlay0 = "#737994"
-surface2 = "#626880"
-surface1 = "#51576d"
-surface0 = "#414559"
-base = "#303446"
-mantle = "#292c3c"
-crust = "#232634"
-
-[palettes.catppuccin_latte]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
