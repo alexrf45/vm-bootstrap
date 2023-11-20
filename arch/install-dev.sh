@@ -20,6 +20,8 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 
 mkdir -p $HOME/.local/bin
 
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+
 echo ".cfg" >>~/.gitignore
 
 git clone --bare https://github.com/alexrf45/dotfiles.git $HOME/.cfg
@@ -30,14 +32,7 @@ git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedF
 
 git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 
-curl \
-	-sL --create-dirs \
-	https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
-	-o $HOME/.zsh/plugins/miniplug.zsh
-
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-git clone https://github.com/jonmosco/kube-tmux.git ~/.tmux/plugins/kube-tmux
 
 mkdir $HOME/.ssh
 
@@ -91,12 +86,6 @@ mkdir ~/.docker
 
 echo '{"experimental":"enabled"}' >.docker/config.json
 
-mv ~/.config/nvim ~/.config/nvim.bak
-
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-
-rm -rf ~/.config/nvim/.git
-
 mkdir ~/.logs
 
 mkdir ~/projects &&
@@ -110,10 +99,6 @@ sudo usermod -aG docker $USER
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -sS https://starship.rs/install.sh | sh
-
-echo 'eval "$(starship init zsh)"' >>$HOME/.zshrc
-
-cp starship.toml $HOME/.config/starship.toml
 
 chsh $USER -s /usr/bin/zsh
 
