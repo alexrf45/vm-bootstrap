@@ -15,6 +15,8 @@ pass insert docker-credential-helpers/docker-pass-initialized-check
 
 yay -s rate-mirrors
 
+yay -S rxvt-unicode-pixbuf
+
 cargo install bat du-dust lsd miniserver speedtest-rs
 
 ```

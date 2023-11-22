@@ -4,15 +4,15 @@ echo -e "Installing base packages..."
 
 sudo pacman -S lightdm lightdm-gtk-greeter \
 	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
-	feh man-pages man-db firefox flameshot gtk-theme-elementary \
+	feh man-pages man-db flameshot gtk-theme-elementary \
 	gtkmm3 arc-gtk-theme network-manager-applet \
 	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools \
-	papirus-icon-theme picom rofi thunar xterm xsel \
+	papirus-icon-theme picom rofi xterm xsel \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit lsd ranger \
 	helix gzip btop unzip sysstat wget cowsay \
-	rsync lolcat figlet fzf rng-tools jq yq nano neofetch remmina p7zip \
+	rsync lolcat figlet fzf rng-tools jq yq  remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
