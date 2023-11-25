@@ -12,7 +12,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit lsd ranger \
 	helix gzip btop unzip sysstat wget cowsay \
-	rsync lolcat figlet fzf rng-tools jq yq  remmina p7zip \
+	rsync lolcat figlet links fzf rng-tools jq yq  remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \

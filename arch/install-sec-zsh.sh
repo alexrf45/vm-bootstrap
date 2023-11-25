@@ -4,7 +4,7 @@ echo -e "Installing base packages..."
 
 sudo pacman -S lightdm lightdm-gtk-greeter \
 	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
-	feh man-pages man-db firefox flameshot gtk-theme-elementary \
+	feh man-pages man-db flameshot gtk-theme-elementary \
 	gtkmm3 arc-gtk-theme network-manager-applet \
 	networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi thunar xterm xsel gvfs \
