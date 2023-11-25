@@ -11,7 +11,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	speech-dispatcher base-devel intel-media-driver \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit \
-	helix gzip btop unzip sysstat wget cowsay \
+	vim direnv just gzip btop unzip sysstat wget cowsay \
 	rsync lolcat figlet fzf rng-tools jq nano neofetch remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
@@ -19,6 +19,9 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
 echo ".cfg" >>~/.gitignore
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 git clone --bare https://github.com/alexrf45/security_dot_files.git $HOME/.cfg
 

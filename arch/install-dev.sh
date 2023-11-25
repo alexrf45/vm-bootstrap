@@ -11,7 +11,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
 	tmux tmuxp terminator zsh lazygit lsd ranger \
-	helix gzip btop unzip sysstat wget cowsay \
+	helix watchexec just direnv vim gzip btop unzip sysstat wget cowsay \
 	rsync lolcat figlet links fzf rng-tools jq yq  remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
@@ -21,6 +21,9 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 mkdir -p $HOME/.local/bin
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo ".cfg" >>~/.gitignore
 
