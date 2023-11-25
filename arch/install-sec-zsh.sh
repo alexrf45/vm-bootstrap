@@ -16,7 +16,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
-	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
+	ttf-iosevka-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
 echo ".cfg" >>~/.gitignore
 
@@ -95,12 +95,6 @@ wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.
 mkdir ~/.docker
 
 echo '{"experimental":"enabled"}' >.docker/config.json
-
-mv ~/.config/nvim ~/.config/nvim.bak
-
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-
-rm -rf ~/.config/nvim/.git
 
 mkdir ~/.logs
 
