@@ -18,6 +18,11 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
 	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
+sudo pacman -S aws-vault btop cowsay direnv docker docker-compose docker-buildx gzip figlet fzf jq just \
+	kubectl k9s lazygit links lolcat neovim npm obsidian p7zip proxychains-ng pulumi \
+	python python-pip python-requests python-virtualenv remmina rng-tools rsync sysstat tealdeer \
+	terminator terraform tmux tmuxp unzip upx watchexec wireshark-qt wget zsh
+
 mkdir -p $HOME/.local/bin
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
@@ -66,8 +71,6 @@ sudo cp .config/pastel-window.jpg /usr/share/pixmaps/.
 mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
-
-cp .config/terminator/config ~/.config/terminator/.
 
 cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && makepkg -si && sudo rm -r $HOME/yay-git
 
