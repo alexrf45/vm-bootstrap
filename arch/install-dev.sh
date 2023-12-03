@@ -10,12 +10,6 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	papirus-icon-theme picom rofi xterm xsel \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
-	tmux tmuxp terminator zsh lazygit lsd neovim \
-	watchexec just direnv vim gzip btop unzip sysstat wget cowsay \
-	rsync lolcat figlet links fzf rng-tools jq yq remmina p7zip \
-	proxychains-ng upx tealdeer docker docker-compose \
-	docker-buildx python python-pip python-virtualenv python-requests \
-	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
 	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
 sudo pacman -S aws-vault btop cowsay direnv docker docker-compose docker-buildx gzip figlet fzf jq just \
