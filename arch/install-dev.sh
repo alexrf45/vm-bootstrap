@@ -10,9 +10,9 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	papirus-icon-theme picom rofi xterm xsel \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
-	tmux tmuxp terminator zsh lazygit lsd ranger \
-	helix watchexec just direnv vim gzip btop unzip sysstat wget cowsay \
-	rsync lolcat figlet links fzf rng-tools jq yq  remmina p7zip \
+	tmux tmuxp terminator zsh lazygit lsd neovim \
+	watchexec just direnv vim gzip btop unzip sysstat wget cowsay \
+	rsync lolcat figlet links fzf rng-tools jq yq remmina p7zip \
 	proxychains-ng upx tealdeer docker docker-compose \
 	docker-buildx python python-pip python-virtualenv python-requests \
 	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
@@ -21,9 +21,6 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 mkdir -p $HOME/.local/bin
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo ".cfg" >>~/.gitignore
 
@@ -64,7 +61,7 @@ cp -r .config/i3blocks ~/.config/ && chmod +x ~/.config/i3blocks/*
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
-sudo cp images/planets.jpg /usr/share/pixmaps/.
+sudo cp .config/pastel-window.jpg /usr/share/pixmaps/.
 
 mkdir -p $HOME/.config/terminator/plugins
 
@@ -88,6 +85,12 @@ wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.
 mkdir ~/.docker
 
 echo '{"experimental":"enabled"}' >.docker/config.json
+
+mv ~/.config/nvim ~/.config/nvim.bak
+
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+rm -rf ~/.config/nvim/.git
 
 mkdir ~/.logs
 
