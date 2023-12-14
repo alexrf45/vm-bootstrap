@@ -9,16 +9,19 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi thunar xterm xsel gvfs \
 	speech-dispatcher base-devel intel-media-driver \
-	pass pipewire-pulse pacman-contrib
+	pass pipewire-pulse pacman-contrib z
 
 sudo pacman -S \
-	tmux tmuxp terminator zsh lazygit code \
-	vim direnv just gzip btop unzip sysstat wget cowsay \
+	tmux tmuxp terminator zsh lazygit code just \
+	vim direnv just gzip btop unzip wget cowsay \
 	rsync lolcat figlet fzf rng-tools jq nano neofetch remmina p7zip \
-	proxychains-ng upx tealdeer docker docker-compose \
-	docker-buildx python python-pip python-virtualenv python-requests \
-	aws-vault wireshark-qt npm terraform pulumi kubectl k9s obsidian \
+	proxychains-ng tealdeer docker docker-compose \
+	docker-buildx python python-pip python-pipx python-virtualenv python-requests \
+	aws-vault npm terraform pulumi kubectl k9s obsidian upx watchexec \
 	ttf-nerd-fonts-symbols-common noto-fonts-emoji ttf-ubuntu-mono-nerd
+
+sudo pacman -S \
+	nmap wireshark-qt
 
 echo ".cfg" >>~/.gitignore
 
@@ -74,17 +77,23 @@ mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
-cp .config/terminator/config $HOME/.config/terminator/.
-
-cp .config/starship.toml $HOME/.config/starship.toml
-
 sudo cp pacman.conf /etc/pacman.conf
+
+curl -O https://blackarch.org/strap.sh
+
+echo 3f121404fd02216a053f7394b8dab67f105228e3 strap.sh | sha1sum -c
+
+chmod +x strap.sh
+
+sudo ./strap.sh
+
+sudo pacman -Syu
 
 cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && makepkg -si && sudo rm -r yay-git
 
 cd $HOME
 
-wget https://releases.hashicorp.com/terraform-ls/0.32.2/terraform-ls_0.32.2_linux_amd64.zip \
+wget https://releases.hashicorp.com/terraform-ls/0.32.4/terraform-ls_0.32.4_linux_amd64.zip \
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
@@ -118,9 +127,9 @@ sudo usermod -aG docker $USER
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-#curl -sS https://starship.rs/install.sh | sh
-
 yay -S burpsuite
+
+yay -S brave-bin
 
 chsh $USER -s /usr/bin/zsh
 
