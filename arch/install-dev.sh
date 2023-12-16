@@ -6,7 +6,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
 	feh man-pages man-db flameshot gtk-theme-elementary \
 	gtkmm3 arc-gtk-theme network-manager-applet \
-	networkmanager-qt networkmanager-openvpn openvpn open-vm-tools \
+	networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi xterm xsel \
 	speech-dispatcher base-devel intel-media-driver gvfs \
 	pass pipewire-pulse pacman-contrib \
@@ -19,7 +19,6 @@ sudo pacman -S aws-vault btop cowsay direnv docker docker-compose docker-buildx 
 
 mkdir -p $HOME/.local/bin
 
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
 echo ".cfg" >>~/.gitignore
 
@@ -106,6 +105,8 @@ sudo usermod -aG docker $USER
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -sS https://starship.rs/install.sh | sh
+
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
 chsh $USER -s /usr/bin/zsh
 
