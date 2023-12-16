@@ -51,6 +51,10 @@ aws-install() {
 
 aws-install
 
+mkdir -p $HOME/.config/rofi
+
+wget https://github.com/w8ste/Tokyonight-rofi-theme/raw/main/tokyonight.rasi -O $HOME/.config/rofi/tokyonight.rasi
+
 sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 	sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
 
@@ -60,7 +64,7 @@ cp -r .config/i3blocks ~/.config/ && chmod +x ~/.config/i3blocks/*
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
-sudo cp .config/pastel-window.jpg /usr/share/pixmaps/.
+sudo cp street.jpg /usr/share/pixmaps/.
 
 mkdir -p $HOME/.config/terminator/plugins
 
@@ -70,7 +74,7 @@ cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && mak
 
 cd $HOME
 
-wget https://releases.hashicorp.com/terraform-ls/0.32.2/terraform-ls_0.32.2_linux_amd64.zip \
+wget https://releases.hashicorp.com/terraform-ls/0.32.4/terraform-ls_0.32.4_linux_amd64.zip \
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
