@@ -3,22 +3,33 @@
 echo -e "Installing base packages..."
 
 sudo pacman -S lightdm lightdm-gtk-greeter \
-	lxappearance-gtk3 i3-wm i3blocks i3lock i3status dmenu \
-	feh man-pages man-db flameshot gtk-theme-elementary \
+	lxappearance-gtk3 i3-wm i3blocks \
+	i3lock i3status dmenu feh man-pages \
+	man-db flameshot gtk-theme-elementary \
 	gtkmm3 arc-gtk-theme network-manager-applet \
 	networkmanager-openvpn openvpn open-vm-tools \
 	papirus-icon-theme picom rofi xterm xsel \
-	speech-dispatcher base-devel intel-media-driver gvfs \
-	pass pipewire-pulse pacman-contrib \
-	ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
+	speech-dispatcher base-devel \
+	intel-media-driver gvfs pass pipewire-pulse \
+	pacman-contrib ttf-jetbrains-mono-nerd \
+	ttf-firacode-nerd \
+	ttf-nerd-fonts-symbols-common noto-fonts-emoji
 
-sudo pacman -S aws-vault btop cowsay direnv docker docker-compose docker-buildx gzip figlet fzf jq just \
-	kubectl k9s lazygit links lolcat neovim npm obsidian p7zip proxychains-ng pulumi \
-	python python-pip python-requests python-virtualenv python-pipx remmina rng-tools rsync sysstat tealdeer \
-	terminator terraform tmux tmuxp unzip upx watchexec wireshark-qt wget zsh
+sudo pacman -S \
+	dust direnv fzf just lazygit links rsync \
+	tealdeer upx watchexec wget zsh tmux tmuxp \
+	unzip gzip p7zip lolcat btop cowsay \
+	figlet rng-tools dust exa miniserve
+
+sudo pacman -S aws-vault docker \
+	docker-compose docker-buildx jq kubectl \
+	k9s neovim npm obsidian \
+	proxychains-ng pulumi python python-pip \
+	python-requests python-virtualenv \
+	python-pipx remmina terminator \
+	terraform wireshark-qt
 
 mkdir -p $HOME/.local/bin
-
 
 echo ".cfg" >>~/.gitignore
 
@@ -105,6 +116,8 @@ sudo usermod -aG docker $USER
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -sS https://starship.rs/install.sh | sh
+
+yay -S rate-mirrors
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
