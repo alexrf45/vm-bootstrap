@@ -34,6 +34,10 @@ sudo pacman -S \
 sudo pacman -S \
 	nmap wireshark-qt remmina proxychains-ng cifs-utils
 
+mkdir -p $HOME/.local/bin
+
+cp kerbrute $HOME/.local/bin/. && chmod +x $HOME/.local/bin/kerbrute
+
 echo ".cfg" >>~/.gitignore
 
 git clone --bare https://github.com/alexrf45/security_dot_files.git $HOME/.cfg
@@ -84,6 +88,8 @@ sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
 sudo cp images/planets.jpg /usr/share/pixmaps/.
 
+sudo cp proxchains.conf /etc/proxychains.conf
+
 mkdir -p $HOME/.config/terminator/plugins
 
 wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
@@ -123,9 +129,38 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 rm -rf ~/.config/nvim/.git
 
-mkdir ~/.logs
+mkdir -p $HOME/.logs
 
-mkdir ~/projects
+mkdir -p $HOME/projects
+
+mkdir -p $HOME/.wordlists
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/Logins.fuzz.txt" -q -O $HOME/.wordlists/logins.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common-api-endpoints-mazen160.txt" -q -O $HOME/.wordlists/api.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt" -q -O $HOME/.wordlists/common.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/directory-list-2.3-small.txt" -q -O $HOME/.wordlists/dir-list.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/raft-small-words-lowercase.txt" -q -O $HOME/.wordlists/raft-small.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/Common-PHP-Filenames.txt" -q -O $HOME/.wordlists/php.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/api/api-endpoints.txt" -q -O $HOME/.wordlists/api-wild.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/fuzz-Bo0oM-friendly.txt" -q -O $HOME/.wordlists/fuzz-1.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/LFI/LFI-Jhaddix.txt" -q -O $HOME/.wordlists/LFI.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Fuzzing/SQLi/Generic-BlindSQLi.fuzzdb.txt" -q -O $HOME/.wordlists/SQL.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-20000.txt" -q -O $HOME/.wordlists/dns.txt
+
+wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/bitquark-subdomains-top100000.txt" -q -O $HOME/.wordlists/dns-1.txt
+
+wget "https://raw.githubusercontent.com/jeanphorn/wordlist/master/usernames.txt" -q -O $HOME/.wordlists/usernames.txt
+
 
 mkdir ~/tools &&
 	cd tools &&
@@ -136,9 +171,29 @@ mkdir ~/tools &&
 
 sudo usermod -aG docker $USER
 
+curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
+	chmod +x ./snyk && mv ./snyk $HOME/.local/bin/snyk
+
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-sudo pacman -S ffuf whatweb sqlmap
+sudo pacman -S ffuf whatweb sqlmap evil-winrm s3scanner crunch rlwrap xpdf exploitdb \
+  rpcbind recordmydesktop netcat onesixtyone snmpcheck sqlitebrowser perl-image-exiftool arjun
+
+active_directory() {
+	cd $HOME/tools/ &&
+		wget -q -O rubeus.exe \
+			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Rubeus.exe" &&
+		wget -q -O certify.exe \
+			"https://github.com/r3motecontrol/Ghostpack-CompiledBinaries/raw/master/Certify.exe" &&
+		wget -q -O sharp.ps1 \
+			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
+		wget -q -O SharpHound.exe \
+			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
+}
+
+active_directory
+
+pipx install netexec impacket rebeus h8mail
 
 yay -S burpsuite
 
