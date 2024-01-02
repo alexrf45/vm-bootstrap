@@ -2,6 +2,10 @@
 
 echo -e "Installing base packages..."
 
+sudo cp pacman.conf /etc/pacman.conf
+
+sleep 5
+
 sudo pacman -S lightdm lightdm-gtk-greeter \
 	lxappearance-gtk3 i3-wm i3blocks \
 	i3lock i3status dmenu feh man-pages \
@@ -80,6 +84,12 @@ cp -r .config/i3blocks ~/.config/ && chmod +x ~/.config/i3blocks/*
 sudo cp lightdm-gtk-greeter-2.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
 sudo cp nice.jpg /usr/share/pixmaps/.
+
+cp -r .config/i3 $HOME/.config/.
+
+mkdir -p $HOME/.config/pictures
+
+cp nice.jpg $HOME/.config/pictures/.
 
 mkdir -p $HOME/.config/terminator/plugins
 

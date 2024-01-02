@@ -13,7 +13,8 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	intel-media-driver gvfs pass pipewire-pulse \
 	pacman-contrib ttf-jetbrains-mono-nerd \
 	ttf-firacode-nerd \
-	ttf-nerd-fonts-symbols-common noto-fonts-emoji
+	ttf-nerd-fonts-symbols-common \
+	noto-fonts-emoji ttf-ubuntu-font-family
 
 sudo pacman -S \
 	dust direnv fzf just lazygit links rsync \
