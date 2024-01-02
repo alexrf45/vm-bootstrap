@@ -161,7 +161,6 @@ wget "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery
 
 wget "https://raw.githubusercontent.com/jeanphorn/wordlist/master/usernames.txt" -q -O $HOME/.wordlists/usernames.txt
 
-
 mkdir ~/tools &&
 	cd tools &&
 	wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt &&
@@ -177,7 +176,7 @@ curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk &&
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 sudo pacman -S ffuf whatweb sqlmap evil-winrm s3scanner crunch rlwrap xpdf exploitdb \
-  rpcbind recordmydesktop netcat onesixtyone snmpcheck sqlitebrowser perl-image-exiftool arjun
+	rpcbind recordmydesktop netcat onesixtyone snmpcheck sqlitebrowser perl-image-exiftool arjun
 
 active_directory() {
 	cd $HOME/tools/ &&
@@ -188,12 +187,14 @@ active_directory() {
 		wget -q -O sharp.ps1 \
 			"https://github.com/BloodHoundAD/BloodHound/raw/master/Collectors/SharpHound.ps1" &&
 		wget -q -O SharpHound.exe \
-			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe" &&
+			"https://raw.githubusercontent.com/BloodHoundAD/BloodHound/master/Collectors/SharpHound.exe"
 }
 
 active_directory
 
-pipx install netexec impacket rebeus h8mail
+#pipx install impacket rebeus h8mail
+
+#pipx install git+https://github.com/Pennyw0rth/NetExec
 
 yay -S burpsuite
 
