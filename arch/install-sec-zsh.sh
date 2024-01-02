@@ -14,7 +14,7 @@ sudo pacman -S lightdm lightdm-gtk-greeter \
 	pipewire-pulse pacman-contrib \
 	ttf-jetbrains-mono-nerd \
 	ttf-nerd-fonts-symbols-common \
-	noto-fonts-emoji ttf-ubuntu-mono-nerd
+	noto-fonts-emoji ttf-ubuntu-mono-nerd ttf-ubuntu-font-family
 
 sudo pacman -S \
 	zsh lazygit z just vim direnv just \
