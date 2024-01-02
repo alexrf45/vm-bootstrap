@@ -99,10 +99,6 @@ cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && mak
 
 cd $HOME
 
-wget https://releases.hashicorp.com/terraform-ls/0.32.4/terraform-ls_0.32.4_linux_amd64.zip \
-	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
-	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
-
 wget https://github.com/docker/docker-credential-helpers/releases/download/v0.8.0/docker-credential-pass-v0.8.0.linux-amd64 &&
 	mv docker-credential-pass-v0.8.0.linux-amd64 docker-credential-pass &&
 	chmod a+x docker-credential-pass &&
@@ -130,12 +126,14 @@ sudo usermod -aG docker $USER
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-curl -sS https://starship.rs/install.sh | sh
-
 yay -S rate-mirrors
 
 yay -S terraform-ls
 
 yay -S brave-bin
+
+cp bashrc $HOME/.bashrc
+
+cp profile $HOME/.profile
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm

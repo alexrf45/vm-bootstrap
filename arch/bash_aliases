@@ -1,0 +1,61 @@
+#aws cli aliases
+alias ec2-check='aws ec2 describe-instances --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,PrivateIP:PrivateIpAddress,Name:Tags[?Key=='Name']|[0].Value,Type:InstanceType,Status:State.Name,VpcId:VpcId,Id:InstanceId}" --filters "Name=instance-state-name,Values=running" --output table'
+
+alias s3-list="aws s3api list-buckets | jq -r '.Buckets[].Name'"
+
+alias vpc-check='aws ec2 --output text --query "Vpcs[*].{VpcId:VpcId,Name:Tags[?Key=='Environment'].Value|[0],CidrBlock:CidrBlock}" describe-vpcs'
+
+alias roland-resources='aws resourcegroupstaggingapi get-resources --tag-filters Key=name,Values=roland --output=table'
+
+alias obsidian-backup-s3='aws s3 sync ~/r0land-notes/r0land/. s3://r0land-obsidian'
+
+alias s3-create='python3 ~/.config/scripts/s3.py'
+
+alias ami-search='aws ec2 describe-images --owner self amazon --filters "Name=architecture,Values=x86_64" "Name=name,Values=ubuntu/images/hvm-ssd/*" "Name=root-device-type,Values=ebs" --output table'
+
+alias aws-cost-current='~/.config/scripts/./awscurrentcost.sh'
+alias aws-cost-hist='~/.config/scripts/./awscost.sh'
+alias aws-services='~/.config/scripts/./services.sh'
+alias aws-service-cost='~/.config/scripts/./servicecost.sh'
+
+#aws_vault aliases
+alias awsv='aws-vault exec Administrator'
+alias awsvec2='aws-vault exec EC2-Admin --duration=30m'
+alias awsvkops='aws-vault exec kops --duration=2h'
+
+#-----------------------------------------GIT ENV & aliases---------------------------------------------
+alias review='git log --graph --oneline --decorate'
+
+#daily drivers for day to day tasks
+alias http='sudo python3 -m http.server 80'
+alias reload='. ~/.bashrc'
+alias update='sudo apt-get update -y'
+alias i='sudo apt-get install -y'
+alias t='tmux -f ~/.tmux.conf'
+alias zcopy='cp .bashrc .bash_login'
+alias dotfilebckup='cp .bashrc ~/r0land-dev/config/bashrc && cp ~/.bash_aliases ~/r0land-dev/config/bash_aliases && cp ~/.profile ~/r0land-dev/config/profile'
+alias public='curl wtfismyip.com/text'
+alias py='python3'
+alias secure-file='~/.config/scripts/./secure-file.sh'
+alias pwd-gen='~/.config/scripts/./pwd-gen.sh'
+#---------------------------------------------------homeserver alias------------------------------------------------------------
+alias homeserver='ssh -i ~/.ssh/homeadm admin@10.3.3.7'
+alias vm-001='ssh -i ~/.ssh/homeadm roland@10.3.3.51'
+
+#portainer
+alias portainer='docker run --name portainer -p 9000:9000 -d -v "/var/run/docker.sock:/var/run/docker.sock" portainer/portainer-ce:latest'
+alias portainerstop='docker stop portainer'
+alias portainerstart='docker start portainer'
+
+#--------------------------------------------------Docker-----------------------------------------------------------------------
+#dockeraliases for general use
+alias dockim='docker image'
+alias dock='docker'
+alias dockc='docker container'
+alias prune='docker container prune'
+alias docknt='docker network'
+
+#dockerer-compose
+alias dockup='docker-compose up -d'
+alias dockdown='docker-compose down'
+
