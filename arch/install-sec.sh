@@ -150,6 +150,10 @@ yay -S rate-mirrors
 
 yay -S kpcli
 
+mkdir $HOME/.npm-global
+
+npm config set prefix '~/.npm-global'
+
 chsh $USER -s /usr/bin/zsh
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm

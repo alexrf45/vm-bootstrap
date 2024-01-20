@@ -122,6 +122,10 @@ yay -S rate-mirrors
 
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
+mkdir $HOME/.npm-global
+
+npm config set prefix '~/.npm-global'
+
 chsh $USER -s /usr/bin/zsh
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
