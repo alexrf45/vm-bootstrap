@@ -3,7 +3,13 @@
 
 sudo apt update && sudo apt install -y \
 	i3 i3blocks i3status feh flameshot picom rofi pass wget curl git ranger \
-	arc-theme lxappearance python3-pip papirus-icon-theme alacritty
+	arc-theme lxappearance python3-pip papirus-icon-theme
+
+mkdir -p $HOME/.local/bin
+
+mkdir -p $HOME/.logs
+
+mkdir $HOME/.npm-global
 
 mkdir -p ~/.local/share/fonts/
 
@@ -27,18 +33,38 @@ curl -fsSL https://get.docker.com -o get-docker.sh &&
 
 sudo usermod -aG docker $USER
 
-wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.5.3/obsidian_1.5.3_amd64.deb -O obsidian.deb" &&
+aws-install() {
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	unzip awscliv2.zip
+	sudo ./aws/install
+	rm -r aws/
+	rm awscliv2.zip
+}
+
+wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.5.3/obsidian_1.5.3_amd64.deb" -O obsidian.deb &&
 	sudo dpkg -i obsidian.deb
 
 wget "https://github.com/Alex313031/thorium/releases/download/M120.0.6099.235/thorium-browser_120.0.6099.235_amd64.deb" -O thorium.deb &&
 	sudo dpkg -i thorium.deb
 
-wget "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz" -O nvim.tar.gz &&
-	gunzip nvim.tar.gz && tar -xf nvim.tar && mv nvim-linux64 $HOME/.local/bin/. && chmod +x $HOME/.local/bin/nvim-linux64/bin/nvim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/bin/nvim
+
+wget https://releases.hashicorp.com/terraform-ls/0.32.4/terraform-ls_0.32.4_linux_amd64.zip \
+	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
+	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
 git clone https://github.com/LazyVim/starter $HOME/.config/nvim
 
 rm -rf $HOME/.config/nvim/.git
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+. ~/.bashrc
+
+npm config set prefix '~/.npm-global'
+
+wget https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64 -q -O $HOME/.local/bin/aws-vault && chmod +x $HOME/.local/bin/aws-vault
 
 #terraform via docker?
 #
