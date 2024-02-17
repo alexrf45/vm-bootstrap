@@ -3,7 +3,7 @@
 
 sudo apt update && sudo apt install -y \
 	i3 i3blocks i3status feh flameshot picom rofi pass wget curl git ranger \
-	arc-theme lxappearance python3-pip papirus-icon-theme
+	arc-theme lxappearance python3-pip papirus-icon-theme lightdm
 
 mkdir -p $HOME/.local/bin
 
@@ -50,7 +50,7 @@ wget "https://github.com/Alex313031/thorium/releases/download/M120.0.6099.235/th
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/bin/nvim
 
-wget https://releases.hashicorp.com/terraform-ls/0.32.4/terraform-ls_0.32.4_linux_amd64.zip \
+wget https://releases.hashicorp.com/terraform-ls/0.32.7/terraform-ls_0.32.7_linux_amd64.zip \
 	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
 	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
