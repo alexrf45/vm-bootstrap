@@ -2,9 +2,7 @@
 
 echo -e "Installing base packages..."
 
-sudo cp pacman.conf /etc/pacman.conf
-
-sleep 5
+sleep 2
 
 base_install() {
 	sudo pacman -S lightdm lightdm-gtk-greeter lxappearance-gtk3 i3-wm i3blocks \
@@ -26,7 +24,7 @@ base_3_install() {
 	sudo pacman -S aws-vault docker \
 		docker-compose docker-buildx jq neovim npm obsidian proxychains-ng pulumi \
 		python python-pip python-requests python-virtualenv python-pipx remmina \
-		terminator wireshark-qt alacritty
+		terminator wireshark-qt alacritty terraform aws-cli-v2
 }
 
 directory_setup() {
@@ -45,11 +43,11 @@ directory_setup() {
 }
 
 ssh_setup() {
-	ssh-keygen -t ed25519 -N '' -C "f0nzy" -f $HOME/.ssh/f0nzy
+	ssh-keygen -t ed25519 -N '' -C "f0nzy" -f $HOME/.ssh/fr3d
 
 	eval "$(ssh-agent -s)"
 
-	ssh-add ~/.ssh/f0nzy
+	ssh-add ~/.ssh/fr3d
 
 }
 
