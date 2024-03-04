@@ -26,10 +26,12 @@ base_3_install() {
 	sudo pacman -S aws-vault docker \
 		docker-compose docker-buildx jq neovim npm obsidian proxychains-ng pulumi \
 		python python-pip python-requests python-virtualenv python-pipx remmina \
-		terminator wireshark-qt
+		terminator wireshark-qt alacritty
 }
 
 directory_setup() {
+	mkdir -p ~/.config/alacritty/themes
+
 	mkdir -p $HOME/.local/bin
 
 	mkdir -p $HOME/.config/pictures
@@ -98,6 +100,8 @@ sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 sudo cp images/gruvbear.jpeg /usr/share/pixmaps/.
 
 wget -q https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
 cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && makepkg -si && sudo rm -r $HOME/yay-git
 
