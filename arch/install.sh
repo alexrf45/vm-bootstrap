@@ -64,7 +64,7 @@ dotfiles_install() {
 }
 
 install_go() {
-	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
+	wget -q https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
 		rm -rf /usr/local/go &&
 		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
 		rm go1.22.0.linux-amd64.tar.gz
@@ -80,7 +80,6 @@ neovim_install() {
 }
 
 base_install
-
 base_2_install
 base_3_install
 directory_setup
@@ -98,7 +97,7 @@ sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
 sudo cp images/gruvbear.jpeg /usr/share/pixmaps/.
 
-wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+wget -q https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
 cd $HOME && git clone https://aur.archlinux.org/yay-git.git && cd yay-git && makepkg -si && sudo rm -r $HOME/yay-git
 
