@@ -16,7 +16,7 @@ base_install() {
 base_2_install() {
 	sudo pacman -S \
 		dust direnv fzf just lazygit links rsync tealdeer upx watchexec wget tmux tmuxp unzip \
-		gzip p7zip lolcat btop cowsay figlet rng-tools miniserve
+		gzip p7zip lolcat btop cowsay figlet rng-tools miniserve bash-completion
 }
 
 base_3_install() {
@@ -24,7 +24,7 @@ base_3_install() {
 	sudo pacman -S aws-vault docker \
 		docker-compose docker-buildx jq neovim npm obsidian proxychains-ng pulumi \
 		python python-pip python-requests python-virtualenv python-pipx remmina \
-		terminator wireshark-qt alacritty terraform aws-cli-v2
+		terminator wireshark-qt alacritty terraform aws-cli-v2 hugo
 }
 
 directory_setup() {
@@ -34,7 +34,7 @@ directory_setup() {
 
 	mkdir -p $HOME/.config/pictures
 
-	mkdir -p $HOME/.config/terminator/plugins
+	#mkdir -p $HOME/.config/terminator/plugins
 
 	mkdir $HOME/.ssh
 
@@ -97,7 +97,7 @@ sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
 sudo cp images/gruvbear.jpeg /usr/share/pixmaps/.
 
-wget -q https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+#wget -q https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
 
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
