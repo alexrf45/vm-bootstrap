@@ -16,7 +16,8 @@ base_install() {
 base_2_install() {
 	sudo pacman -S \
 		dust direnv fzf just lazygit links rsync tealdeer upx watchexec wget tmux tmuxp unzip \
-		gzip p7zip lolcat btop cowsay figlet rng-tools miniserve bash-completion
+		gzip p7zip lolcat btop cowsay figlet rng-tools miniserve bash-completion zathura zathura-pdf-poppler poppler-data \
+		python-pynvim ueberzug gtk-engine-murrine
 }
 
 base_3_install() {
@@ -24,7 +25,7 @@ base_3_install() {
 	sudo pacman -S aws-vault docker \
 		docker-compose docker-buildx jq neovim npm obsidian proxychains-ng pulumi \
 		python python-pip python-requests python-virtualenv python-pipx remmina \
-		terminator wireshark-qt alacritty terraform aws-cli-v2 hugo
+		terminator wireshark-qt alacritty terraform aws-cli-v2 hugo task k9s kubectl helm
 }
 
 directory_setup() {
