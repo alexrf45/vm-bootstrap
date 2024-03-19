@@ -10,7 +10,7 @@ base_install() {
 		gtkmm3 arc-gtk-theme network-manager-applet networkmanager-openvpn \
 		openvpn open-vm-tools papirus-icon-theme picom rofi xterm xsel speech-dispatcher \
 		base-devel intel-media-driver gvfs pass pipewire-pulse pacman-contrib \
-		ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji
+		ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji ttf-iosevka-nerd
 }
 
 base_2_install() {
