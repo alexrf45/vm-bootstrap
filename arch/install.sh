@@ -9,7 +9,7 @@ base_install() {
 		i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
 		gtkmm3 arc-gtk-theme network-manager-applet networkmanager-openvpn \
 		openvpn open-vm-tools papirus-icon-theme picom rofi xterm xsel speech-dispatcher \
-		base-devel intel-media-driver gvfs pass pipewire-pulse pacman-contrib \
+		base-devel intel-media-driver gvfs pass pipewire-pulse pacman-contrib materia-gtk-theme \
 		ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-nerd-fonts-symbols-common noto-fonts-emoji ttf-iosevka-nerd
 }
 
@@ -113,6 +113,8 @@ mkdir ~/projects &&
 	git clone https://github.com/alexrf45/Prox-Tor.git
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
+wget https://raw.github.com/xwmx/nb/master/nb -O $HOME/.local/bin/nb && chmod +x $HOME/.local/bin/nb
 
 sudo usermod -aG docker $USER
 
