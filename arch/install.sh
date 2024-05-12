@@ -64,12 +64,12 @@ dotfiles_install() {
 	git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 }
 
-install_go() {
-	wget -q https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
-		rm -rf /usr/local/go &&
-		tar -C $HOME/.local/bin -xzf go1.22.0.linux-amd64.tar.gz &&
-		rm go1.22.0.linux-amd64.tar.gz
-}
+# install_go() {
+# 	wget -q https://go.dev/dl/go1.22.0.linux-amd64.tar.gz &&
+# 		rm -rf /usr/local/go &&
+# 		tar -C $HOME/.local/ -xzf go1.22.0.linux-amd64.tar.gz &&
+# 		rm go1.22.0.linux-amd64.tar.gz
+# }
 
 neovim_install() {
 	mv ~/.config/nvim ~/.config/nvim.bak
@@ -85,7 +85,7 @@ base_2_install
 base_3_install
 directory_setup
 ssh_setup
-install_go
+#install_go
 dotfiles_install
 neovim_install
 
@@ -117,5 +117,7 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 wget https://raw.github.com/xwmx/nb/master/nb -O $HOME/.local/bin/nb && chmod +x $HOME/.local/bin/nb
 
 sudo usermod -aG docker $USER
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
