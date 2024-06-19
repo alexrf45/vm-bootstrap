@@ -72,6 +72,15 @@ neovim_install() {
 
 }
 
+aws_install() {
+
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+	unzip awscliv2.zip
+
+	sudo ./aws/install && rm -r aws/
+}
+
 base_install
 base_2_install
 base_3_install
@@ -79,6 +88,7 @@ directory_setup
 ssh_setup
 dotfiles_install
 neovim_install
+aws_install
 
 sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 	sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
