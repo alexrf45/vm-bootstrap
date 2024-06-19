@@ -11,7 +11,7 @@ base_install() {
 		openvpn open-vm-tools papirus-icon-theme picom rofi xterm xsel speech-dispatcher \
 		base-devel intel-media-driver gvfs pass pulseaudia-alsa pulseaudio-equalizer pacman-contrib materia-gtk-theme \
 		ttf-anonymous-pro ttf-hack ttf-nerd-fonts-symbols-common noto-fonts-emoji ttf-iosevka-nerd \
-		inotify-tools notification-daemon bluez-libs bluez-utils bluez gtk-engine-murrine pinentry
+		inotify-tools notification-daemon bluez-libs bluez-utils bluez gtk-engine-murrine pinentry xfce4-notifyd
 }
 
 base_2_install() {
