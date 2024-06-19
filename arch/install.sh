@@ -108,7 +108,9 @@ mkdir ~/projects &&
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-wget https://raw.github.com/xwmx/nb/master/nb -O $HOME/.local/bin/nb && chmod +x $HOME/.local/bin/nb
+wget -q "https://raw.github.com/xwmx/nb/master/nb" -O $HOME/.local/bin/nb && chmod +x $HOME/.local/bin/nb
+
+wget -q "https://github.com/rwxrob/pomo/releases/download/v0.2.3/pomo-linux-amd64" -O $HOME/.local/bin/pomo && chmod +x $HOME/.loca/bin/pomo
 
 sudo usermod -aG docker $USER
 
