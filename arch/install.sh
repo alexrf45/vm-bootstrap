@@ -4,6 +4,14 @@ echo -e "Installing base packages..."
 
 sleep 2
 
+sudo pacman -S pacman-contrib
+
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup >/etc/pacman.d/mirrorlist
+
+sudo pacman -Syyu
+
 base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
@@ -13,8 +21,8 @@ base_desktop_install() {
 
 base_packages_install() {
   sudo pacman -S network-manager-applet networkmanager-openvpn xterm xsel speech-dispatcher \
-    base-devel intel-media-driver gvfs openvpn open-vm-tools \
-    pass pulseaudia-alsa pulseaudio-equalizer pacman-contrib pciutils \
+    gvfs openvpn open-vm-tools \
+    pass pulseaudia-alsa pulseaudio-equalizer pciutils \
     inotify-tools notification-daemon bluez-libs bluez-utils bluez pinentry xfce4-notifyd
 
 }
