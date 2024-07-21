@@ -29,7 +29,7 @@ base_desktop_install() {
 base_packages_install() {
   sudo pacman -S network-manager-applet networkmanager-openvpn xterm xsel speech-dispatcher \
     gvfs openvpn open-vm-tools \
-    pass pulseaudio-alsa pulseaudio-equalizer \
+    pass pipewire-alsa pipewire-equalizer \
     inotify-tools notification-daemon bluez-utils bluez xfce4-notifyd
 
 }
@@ -158,7 +158,7 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 
 sudo systemctl start docker && sudo systemctl enable docker
 
-sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+sudo cp ./lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
 sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
