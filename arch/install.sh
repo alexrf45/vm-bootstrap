@@ -9,6 +9,7 @@ sleep 2
 rm $HOME/.bashrc
 rm $HOME/.bash_profile
 rm $HOME/.bash_logout
+rm $HOME/.bash_history
 
 sudo pacman -S pacman-contrib
 
@@ -62,7 +63,7 @@ directory_setup() {
 
   mkdir -p $HOME/.config/pictures
 
-  cp ./images/gruvbear.jpeg $HOME/.config/.
+  cp ./images/gruvbear.jpeg $HOME/.config/pictures/.
 
   mkdir -p $HOME/.config/i3
 
