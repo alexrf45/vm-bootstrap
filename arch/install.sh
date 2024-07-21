@@ -1,8 +1,14 @@
 #!/bin/bash
 
+set -e
+
 echo -e "Installing base packages..."
 
 sleep 2
+
+rm $HOME/.bashrc
+rm $HOME/.bash_profile
+rm $HOME/.bash_logout
 
 sudo pacman -S pacman-contrib
 
@@ -22,8 +28,8 @@ base_desktop_install() {
 base_packages_install() {
   sudo pacman -S network-manager-applet networkmanager-openvpn xterm xsel speech-dispatcher \
     gvfs openvpn open-vm-tools \
-    pass pulseaudia-alsa pulseaudio-equalizer pciutils \
-    inotify-tools notification-daemon bluez-libs bluez-utils bluez pinentry xfce4-notifyd
+    pass pulseaudio-alsa pulseaudio-equalizer \
+    inotify-tools notification-daemon bluez-utils bluez xfce4-notifyd
 
 }
 
@@ -56,6 +62,16 @@ directory_setup() {
 
   mkdir -p $HOME/.config/pictures
 
+  cp ./images/gruvbear.jpeg $HOME/.config/.
+
+  mkdir -p $HOME/.config/i3
+
+  cp config $HOME/.config/i3/.
+
+  mkdir -p $HOME/.config/rofi
+
+  cp config.rasi $HOME/.config/rofi/.
+
   mkdir $HOME/.ssh
 
   mkdir $HOME/.logs
@@ -66,6 +82,10 @@ directory_setup() {
 
   mkdir $HOME/.downloads
 
+}
+
+scripts_setup() {
+  cp -r scripts/ $HOME/.config/
 }
 
 ssh_setup() {
@@ -106,9 +126,15 @@ aws_install() {
 
   sudo ./aws/install && rm -r aws/
 }
-paru_install() {
-  git clone https://aur.archlinux.org/paru.git &&
-    cd paru && makepkg -si && sudo rm -r $HOME/paru
+# paru_install() {
+#   git clone https://aur.archlinux.org/paru.git &&
+#     cd paru && makepkg -si && sudo rm -r $HOME/paru
+# }
+
+yay_install() {
+  git clone https://aur.archlinux.org/yay-bin.git
+  cd yay-bin
+  makepkg -si
 }
 
 base_desktop_install
@@ -117,11 +143,14 @@ base_font_install
 base_tools_install
 base_tools_1_install
 directory_setup
+scripts_setup
 ssh_setup
+
 dotfiles_install
 neovim_install
 aws_install
-paru_install
+#paru_install
+yay_install
 
 sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
   sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
