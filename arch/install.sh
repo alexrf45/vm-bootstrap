@@ -29,7 +29,7 @@ base_desktop_install() {
 base_packages_install() {
   sudo pacman -S network-manager-applet networkmanager-openvpn xterm xsel speech-dispatcher \
     gvfs openvpn open-vm-tools \
-    pass pipewire-alsa pipewire-equalizer \
+    pass pipewire-alsa pipewire-equalizer paprefs \
     inotify-tools notification-daemon bluez-utils bluez xfce4-notifyd
 
 }
