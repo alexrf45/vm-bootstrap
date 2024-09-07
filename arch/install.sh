@@ -4,21 +4,6 @@ set -e
 
 echo -e "Installing base packages..."
 
-sleep 2
-
-rm $HOME/.bashrc
-rm $HOME/.bash_profile
-rm $HOME/.bash_logout
-rm $HOME/.bash_history
-
-sudo pacman -S pacman-contrib
-
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-
-sudo rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup >/etc/pacman.d/mirrorlist
-
-sudo pacman -Syyu
-
 base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
@@ -28,8 +13,8 @@ base_desktop_install() {
 
 base_packages_install() {
   sudo pacman -S network-manager-applet networkmanager-openvpn xterm xsel speech-dispatcher \
-    gvfs openvpn open-vm-tools \
-    pass pipewire-alsa pipewire-equalizer paprefs \
+    gvfs openvpn open-vm-tools pavucontrol \
+    pass paprefs \
     inotify-tools notification-daemon bluez-utils bluez xfce4-notifyd
 
 }
@@ -43,7 +28,7 @@ base_font_install() {
 base_tools_install() {
   sudo pacman -S \
     dust fzf just lazygit links ffmpeg rsync tealdeer upx wget tmux tmuxp unzip \
-    gzip p7zip lolcat btop cowsay figlet rng-tools miniserve bash-completion zathura zathura-pdf-poppler poppler-data \
+    gzip p7zip lolcat btop cowsay figlet rng-tools zsh miniserve bash-completion zathura zathura-pdf-poppler poppler-data \
     python-pynvim ueberzug thunar sqlitebrowser sqlite3 yazi
 }
 
@@ -61,19 +46,21 @@ directory_setup() {
 
   mkdir -p $HOME/.local/bin
 
-  mkdir -p $HOME/.config/pictures
+  #mkdir -p $HOME/.config/pictures
 
-  cp ./images/gruvbear.jpeg $HOME/.config/pictures/.
+  #cp ./images/gruvbear.jpeg $HOME/.config/pictures/.
 
-  mkdir -p $HOME/.config/i3
+  #mkdir -p $HOME/.config/i3
 
-  cp config $HOME/.config/i3/.
+  #cp config $HOME/.config/i3/.
 
-  mkdir -p $HOME/.config/rofi
+  #mkdir -p $HOME/.config/rofi
 
-  cp config.rasi $HOME/.config/rofi/.
+  #cp config.rasi $HOME/.config/rofi/.
 
-  mkdir $HOME/.ssh
+  #mkdir $HOME/.ssh
+
+  mkdir -p $HOME/.miniplug/plugins
 
   mkdir $HOME/.logs
 
@@ -101,7 +88,7 @@ ssh_setup() {
 dotfiles_install() {
   echo ".cfg" >>~/.gitignore
 
-  git clone --bare https://github.com/alexrf45/dot.git $HOME/.cfg
+  git clone --bare https://github.com/alexrf45/dotfiles-security.git $HOME/.cfg
 
   alias dot='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -111,7 +98,7 @@ dotfiles_install() {
 }
 
 neovim_install() {
-  mv ~/.config/nvim ~/.config/nvim.bak
+  #mv ~/.config/nvim ~/.config/nvim.bak
 
   git clone https://github.com/LazyVim/starter ~/.config/nvim
 
@@ -127,10 +114,6 @@ aws_install() {
 
   sudo ./aws/install && rm -r aws/
 }
-# paru_install() {
-#   git clone https://aur.archlinux.org/paru.git &&
-#     cd paru && makepkg -si && sudo rm -r $HOME/paru
-# }
 
 yay_install() {
   git clone https://aur.archlinux.org/yay-bin.git
@@ -138,36 +121,45 @@ yay_install() {
   makepkg -si
 }
 
-base_desktop_install
-base_packages_install
-base_font_install
-base_tools_install
-base_tools_1_install
-directory_setup
-scripts_setup
-ssh_setup
+zsh_miniplug() {
+  curl \
+    -sL --create-dirs \
+    https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
+    -o $HOME/.miniplug/plugins/miniplug.zsh
 
-dotfiles_install
-neovim_install
-aws_install
-#paru_install
-yay_install
+}
 
-sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
-  sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
+#base_desktop_install
+#base_packages_install
+#base_font_install
+#base_tools_install
+#base_tools_1_install
+#directory_setup
+#scripts_setup
+#ssh_setup
 
-sudo systemctl start docker && sudo systemctl enable docker
+#dotfiles_install
+#neovim_install
+#aws_install
+#yay_install
 
-sudo cp ./lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+#sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
+# sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
 
-sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
+#sudo systemctl start docker && sudo systemctl enable docker
+
+zsh_miniplug
+
+sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+
+sudo cp images/gruvbear.jpeg /usr/share/pixmaps/.
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-
-wget -q "https://raw.github.com/xwmx/nb/master/nb" -O $HOME/.local/bin/nb && chmod +x $HOME/.local/bin/nb
 
 sudo usermod -aG docker $USER
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+sudo chsh $USER -s /bin/zsh
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
