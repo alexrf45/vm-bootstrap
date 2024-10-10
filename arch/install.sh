@@ -8,7 +8,7 @@ base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
     gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi \
-    materia-gtk-theme gtk-engine-murrine
+    materia-gtk-theme gtk-engine-murrine pipewire
 }
 
 base_packages_install() {
@@ -46,19 +46,17 @@ directory_setup() {
 
   mkdir -p $HOME/.local/bin
 
-  #mkdir -p $HOME/.config/pictures
+  mkdir -p $HOME/.config/pictures
 
-  #cp ./images/gruvbear.jpeg $HOME/.config/pictures/.
+  mkdir -p $HOME/.config/i3
 
-  #mkdir -p $HOME/.config/i3
+  cp ./config $HOME/.config/i3/.
 
-  #cp config $HOME/.config/i3/.
+  mkdir -p $HOME/.config/rofi
 
-  #mkdir -p $HOME/.config/rofi
+  cp ./config.rasi $HOME/.config/rofi/.
 
-  #cp config.rasi $HOME/.config/rofi/.
-
-  #mkdir $HOME/.ssh
+  mkdir $HOME/.ssh
 
   mkdir -p $HOME/.miniplug/plugins
 
@@ -98,7 +96,7 @@ dotfiles_install() {
 }
 
 neovim_install() {
-  #mv ~/.config/nvim ~/.config/nvim.bak
+  mv ~/.config/nvim ~/.config/nvim.bak
 
   git clone https://github.com/LazyVim/starter ~/.config/nvim
 
@@ -129,30 +127,30 @@ zsh_miniplug() {
 
 }
 
-#base_desktop_install
-#base_packages_install
-#base_font_install
-#base_tools_install
-#base_tools_1_install
-#directory_setup
-#scripts_setup
-#ssh_setup
+base_desktop_install
+base_packages_install
+base_font_install
+base_tools_install
+base_tools_1_install
+directory_setup
+scripts_setup
+ssh_setup
 
-#dotfiles_install
-#neovim_install
-#aws_install
-#yay_install
+dotfiles_install
+neovim_install
+aws_install
+yay_install
 
-#sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
-# sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
+sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
+  sudo systemctl enable vmtoolsd.service vmware-vmblock-fuse.service
 
-#sudo systemctl start docker && sudo systemctl enable docker
+sudo systemctl start docker && sudo systemctl enable docker
 
 zsh_miniplug
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
-sudo cp images/gruvbear.jpeg /usr/share/pixmaps/.
+sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
