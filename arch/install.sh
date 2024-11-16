@@ -8,7 +8,7 @@ base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
     gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi \
-    materia-gtk-theme gtk-engine-murrine pipewire
+    materia-gtk-theme gtk-engine-murrine pipewire udiskies udisks2 udisks2-qt5
 }
 
 base_packages_install() {
@@ -50,11 +50,7 @@ directory_setup() {
 
   mkdir -p $HOME/.config/i3
 
-  cp ./config $HOME/.config/i3/.
-
   mkdir -p $HOME/.config/rofi
-
-  cp ./config.rasi $HOME/.config/rofi/.
 
   mkdir $HOME/.ssh
 
@@ -67,6 +63,10 @@ directory_setup() {
   mkdir $HOME/.docker
 
   mkdir $HOME/.downloads
+
+  sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+
+  sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
 }
 
@@ -86,7 +86,7 @@ ssh_setup() {
 dotfiles_install() {
   echo ".cfg" >>~/.gitignore
 
-  git clone --bare https://github.com/alexrf45/dotfiles-security.git $HOME/.cfg
+  git clone --bare https://github.com/alexrf45/dot.git $HOME/.cfg
 
   alias dot='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -147,10 +147,6 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 sudo systemctl start docker && sudo systemctl enable docker
 
 zsh_miniplug
-
-sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
-
-sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
