@@ -7,7 +7,7 @@ echo -e "Installing base packages..."
 base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
-    gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi \
+    gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi rtkit alsa-utils \
     materia-gtk-theme gtk-engine-murrine pipewire udiskies udisks2 udisks2-qt5
 }
 
