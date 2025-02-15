@@ -8,7 +8,7 @@ base_desktop_install() {
   sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
     gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi rtkit alsa-utils \
-    materia-gtk-theme gtk-engine-murrine pipewire udisks2 udisks2-qt5
+    materia-gtk-theme gtk-engine-murrine pipewire
 }
 
 base_packages_install() {
@@ -19,15 +19,15 @@ base_packages_install() {
 }
 
 base_font_install() {
-  sudo pacman -S ttf-anonymous-pro ttf-hack ttf-nerd-fonts-symbols-common \
-    noto-fonts-emoji ttf-iosevka-nerd ttf-agave-nerd ttf-jetbrains-mono \
-    ttf-nerd-fonts-symbols ttf-meslo-nerd powerline-fonts powerline-common powerline
+  sudo pacman -S ttf-anonymous-pro ttf-nerd-fonts-symbols-common \
+    noto-fonts-emoji ttf-ubuntu-font-family ttf-jetbrains-mono \
+    ttf-nerd-fonts-symbols powerline-fonts powerline-common powerline
 }
 
 base_tools_install() {
   sudo pacman -S \
-    fzf just lazygit links ffmpeg rsync tealdeer upx wget tmux tmuxp unzip \
-    gzip p7zip lolcat btop cowsay figlet rng-tools miniserve bash-completion zathura zathura-pdf-poppler poppler-data \
+    fzf just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
+    gzip p7zip lolcat btop cowsay figlet rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
     python-pynvim ueberzug thunar sqlitebrowser sqlite3 yazi
 }
 
@@ -37,7 +37,7 @@ base_tools_1_install() {
     docker-compose docker-buildx jq neovim npm obsidian \
     python python-pip python-requests python-virtualenv python-pipx remmina \
     terminator wireshark-qt alacritty yq ripgrep rng-tools \
-    mkcert k9s argon2 age direnv talosctl helm terraform kubectl
+    mkcert k9s argon2 age direnv talosctl helm terraform kubectl sops
 }
 
 directory_setup() {
@@ -53,7 +53,7 @@ directory_setup() {
 
   mkdir $HOME/.ssh
 
-  #  mkdir -p $HOME/.miniplug/plugins
+  mkdir -p $HOME/.miniplug/plugins
 
   mkdir $HOME/.logs
 
@@ -63,16 +63,32 @@ directory_setup() {
 
   mkdir $HOME/.downloads
 
-  cp ./config ~/.config/i3/.
+  #cp ./config ~/.config/i3/.
 
   sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
   sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
-  cp ./images/gruvbear.jpeg ~/.config/pictures/.
+  #cp ./images/gruvbear.jpeg ~/.config/pictures/.
 
 }
 
+dotfiles_install (){ 
+   echo ".cfg" >> .gitignore && \
+   git clone https://github.com/alexrf45/dotfiles.git $HOME/.cfg && \
+   alias dot='/usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME' && \
+   dot config --local status.showUntrackedFiles no && \
+   dot checkout
+}
+
+
+miniplug_install() {
+  curl \
+  -sL --create-dirs \
+  https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
+  -o $HOME/.miniplug/plugins/miniplug.zsh
+
+}
 scripts_setup() {
   cp -r scripts/ $HOME/.config/
 }
@@ -110,17 +126,16 @@ yay_install() {
   makepkg -si
 }
 
-#base_desktop_install
-#base_packages_install
-#base_font_install
-#base_tools_install
-#base_tools_1_install
-#directory_setup
+base_desktop_install
+base_packages_install
+base_font_install
+base_tools_install
+base_tools_1_install
+directory_setup
+dotfiles_install
+miniplug_install
 #scripts_setup
-#ssh_setup
-
-#dotfiles_install
-mkdir -p ~/.config/nvim
+ssh_setup
 neovim_install
 aws_install
 yay_install
@@ -131,6 +146,8 @@ sudo systemctl start vmtoolsd.service vmware-vmblock-fuse.service &&
 sudo systemctl start docker && sudo systemctl enable docker
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
+curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker $USER
 
