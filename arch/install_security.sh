@@ -65,9 +65,9 @@ directory_setup() {
 
   #cp ./config ~/.config/i3/.
 
-  sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+  #sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 
-  sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
+  #sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
 
   #cp ./images/gruvbear.jpeg ~/.config/pictures/.
 
@@ -92,14 +92,14 @@ scripts_setup() {
   cp -r scripts/ $HOME/.config/
 }
 
-ssh_setup() {
-  ssh-keygen -t ed25519 -N '' -C "fr3d" -f $HOME/.ssh/fr3d
-
-  eval "$(ssh-agent -s)"
-
-  ssh-add ~/.ssh/fr3d
-
-}
+# ssh_setup() {
+#   ssh-keygen -t ed25519 -N '' -C "fr3d" -f $HOME/.ssh/fr3d
+#
+#   eval "$(ssh-agent -s)"
+#
+#   ssh-add ~/.ssh/fr3d
+#
+# }
 
 neovim_install() {
   mv ~/.config/nvim ~/.config/nvim.bak
@@ -134,7 +134,7 @@ directory_setup
 dotfiles_install
 miniplug_install
 scripts_setup
-ssh_setup
+#ssh_setup
 neovim_install
 aws_install
 yay_install
@@ -148,6 +148,6 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -fsS https://dl.brave.com/install.sh | sh
 
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm

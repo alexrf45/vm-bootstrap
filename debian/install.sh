@@ -1,18 +1,20 @@
 #!/bin/bash
 # install script for debian
 
+set -e
+
 sudo apt update && sudo apt install -y \
-	i3 i3blocks i3status feh flameshot picom rofi pass wget curl git ranger \
-	arc-theme lxappearance python3-pip papirus-icon-theme lightdm terminator tmux cmake \
-	pkg-config libfontconfig1-dev linux-headers-amd64 unzip
+  i3 i3blocks i3status feh flameshot picom rofi pass wget curl git \
+  arc-theme lxappearance python3-pip papirus-icon-theme lightdm terminator tmux cmake \
+  pkg-config libfontconfig1-dev linux-headers-amd64 unzip
 
 mkdir $HOME/.ssh
 
-ssh-keygen -t ed25519 -N '' -C "fr3d" -f $HOME/.ssh/fr3d
+#ssh-keygen -t ed25519 -N '' -C "fr3d" -f $HOME/.ssh/fr3d
 
-eval "$(ssh-agent -s)"
+#eval "$(ssh-agent -s)"
 
-ssh-add ~/.ssh/fr3d
+#ssh-add ~/.ssh/fr3d
 
 mkdir -p $HOME/.local/bin
 
@@ -35,29 +37,26 @@ unzip JetBrainsMono.zip -d ~/.local/share/fonts/
 fc-cache -fv
 
 curl -fsSL https://get.docker.com -o get-docker.sh &&
-	sh get-docker.sh
+  sh get-docker.sh
 
 sudo usermod -aG docker $USER
 
 aws-install() {
-	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-	unzip awscliv2.zip
-	sudo ./aws/install
-	rm -r aws/
-	rm awscliv2.zip
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install
+  rm -r aws/
+  rm awscliv2.zip
 }
 
 aws_install
-
-wget "https://github.com/Alex313031/thorium/releases/download/M120.0.6099.235/thorium-browser_120.0.6099.235_amd64.deb" -O thorium.deb &&
-	sudo dpkg -i thorium.deb
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage && mv nvim.appimage $HOME/.local/bin/nvim
 
 wget https://releases.hashicorp.com/terraform-ls/0.32.7/terraform-ls_0.32.7_linux_amd64.zip \
-	-O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
-	mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
+  -O terraform-ls.zip && unzip terraform-ls.zip && chmod +x terraform-ls &&
+  mv terraform-ls ~/.local/bin/. && rm terraform-ls.zip
 
 git clone https://github.com/LazyVim/starter $HOME/.config/nvim
 
@@ -78,11 +77,11 @@ wget https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-l
 mkdir -p $HOME/projects
 
 mkdir ~/tools &&
-	cd tools &&
-	wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt &&
-	git clone https://github.com/alexrf45/reverse-ssh.git &&
-	git clone https://github.com/alexrf45/bloodhound-dev.git &&
-	git clone https://github.com/alexrf45/Prox-Tor.git
+  cd tools &&
+  #wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt &&
+  git clone https://github.com/alexrf45/reverse-ssh.git &&
+  git clone https://github.com/alexrf45/bloodhound-dev.git &&
+  git clone https://github.com/alexrf45/Prox-Tor.git
 
 sudo usermod -aG docker $USER
 
