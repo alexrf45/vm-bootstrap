@@ -75,7 +75,7 @@ directory_setup() {
 
 dotfiles_install() {
   echo ".cfg" >>.gitignore &&
-    git clone https://github.com/alexrf45/dotfiles.git $HOME/.cfg &&
+    git clone https://github.com/alexrf45/dot-sec.git $HOME/.cfg &&
     alias dot='/usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME' &&
     dot config --local status.showUntrackedFiles no &&
     dot checkout
@@ -146,8 +146,10 @@ sudo systemctl start docker && sudo systemctl enable docker
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-curl -fsS https://dl.brave.com/install.sh | sh
+#curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
+
+yay -S zen-browser-bin google-chrome
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
