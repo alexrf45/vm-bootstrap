@@ -5,7 +5,7 @@ set -e
 echo -e "Installing base packages..."
 
 base_desktop_install() {
-  sudo pacman -S lightdm lightdm-gtk-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
+  sudo pacman -S lightdm lightdm-slick-greeter xorg-xhost lxappearance-gtk3 i3-wm i3blocks \
     i3lock i3status dmenu feh man-pages man-db flameshot gtk-theme-elementary \
     gtkmm3 arc-gtk-theme papirus-icon-theme picom rofi rtkit alsa-utils \
     materia-gtk-theme gtk-engine-murrine pipewire
@@ -19,8 +19,8 @@ base_packages_install() {
 }
 
 base_font_install() {
-  sudo pacman -S ttf-anonymous-pro ttf-nerd-fonts-symbols-common \
-    noto-fonts-emoji ttf-ubuntu-font-family ttf-jetbrains-mono \
+  sudo pacman -S ttf-nerd-fonts-symbols-common \
+    noto-fonts-emoji ttf-iosevka-nerd ttf-jetbrains-mono \
     ttf-nerd-fonts-symbols powerline-fonts powerline-common powerline
 }
 
@@ -28,7 +28,7 @@ base_tools_install() {
   sudo pacman -S \
     fzf just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
     gzip p7zip lolcat btop cowsay figlet rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
-    python-pynvim ueberzug thunar sqlitebrowser sqlite3 yazi
+    python-pynvim ueberzug thunar sqlitebrowser sqlite3
 }
 
 base_tools_1_install() {
@@ -63,13 +63,7 @@ directory_setup() {
 
   mkdir $HOME/.downloads
 
-  #cp ./config ~/.config/i3/.
-
   #sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
-
-  #sudo cp ./images/gruvbear.jpeg /usr/share/pixmaps/.
-
-  #cp ./images/gruvbear.jpeg ~/.config/pictures/.
 
 }
 
@@ -88,34 +82,17 @@ miniplug_install() {
     -o $HOME/.miniplug/plugins/miniplug.zsh
 
 }
-scripts_setup() {
-  cp -r scripts/ $HOME/.config/
-}
-
-# ssh_setup() {
-#   ssh-keygen -t ed25519 -N '' -C "fr3d" -f $HOME/.ssh/fr3d
-#
-#   eval "$(ssh-agent -s)"
-#
-#   ssh-add ~/.ssh/fr3d
-#
-# }
 
 neovim_install() {
   mv ~/.config/nvim ~/.config/nvim.bak
-
   git clone https://github.com/LazyVim/starter ~/.config/nvim
-
   rm -rf ~/.config/nvim/.git
 
 }
 
 aws_install() {
-
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
   unzip awscliv2.zip
-
   sudo ./aws/install && rm -r aws/
 }
 
@@ -133,8 +110,6 @@ base_tools_1_install
 directory_setup
 dotfiles_install
 miniplug_install
-scripts_setup
-#ssh_setup
 neovim_install
 aws_install
 yay_install
@@ -149,6 +124,8 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 #curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 yay -S zen-browser-bin google-chrome
 
