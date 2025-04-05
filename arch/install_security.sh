@@ -41,45 +41,43 @@ base_tools_1_install() {
 }
 
 directory_setup() {
-  mkdir -p $HOME/.config/alacritty/
+  mkdir -p "$HOME/.config/alacritty/"
 
-  mkdir -p $HOME/.local/bin
+  mkdir -p "$HOME/.local/bin"
 
-  mkdir -p $HOME/.config/pictures
+  mkdir -p "$HOME/.config/pictures"
 
-  mkdir -p $HOME/.config/i3
+  mkdir -p "$HOME/.config/i3"
 
-  mkdir -p $HOME/.config/rofi
+  mkdir -p "$HOME/.config/rofi"
 
-  mkdir $HOME/.ssh
+  mkdir "$HOME/.ssh"
 
-  mkdir -p $HOME/.miniplug/plugins
+  mkdir -p "$HOME/.miniplug/plugins"
 
-  mkdir $HOME/.logs
+  mkdir "$HOME/.logs"
 
-  mkdir $HOME/projects
+  mkdir "$HOME/projects"
 
-  mkdir $HOME/.docker
+  mkdir "$HOME/.docker"
 
-  mkdir $HOME/.downloads
-
-  #sudo cp lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+  mkdir "$HOME/.downloads"
 
 }
 
 dotfiles_install() {
   echo ".cfg" >>.gitignore &&
-    git clone https://github.com/alexrf45/dot-sec.git $HOME/.cfg &&
-    alias dot='/usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME' &&
-    dot config --local status.showUntrackedFiles no &&
-    dot checkout
+    git clone https://github.com/alexrf45/dot.git "$HOME/.cfg" &&
+    #alias dot='/usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME' &&
+    /usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME config --local status.showUntrackedFiles no &&
+    /usr/bin/git --git-dir=$HOME/.cfg/.git --work-tree=$HOME checkout
 }
 
 miniplug_install() {
   curl \
     -sL --create-dirs \
     https://git.sr.ht/~yerinalexey/miniplug/blob/master/miniplug.zsh \
-    -o $HOME/.miniplug/plugins/miniplug.zsh
+    -o "$HOME/.miniplug/plugins/miniplug.zsh"
 
 }
 
