@@ -30,7 +30,7 @@ base_tools_install() {
     just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
     gzip p7zip lolcat btop cowsay figlet rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
     python-pynvim ueberzug thunar sqlitebrowser sqlite3 yazi syncthing python python-pip python-requests python-virtualenv python-pipx remmina \
-    terminator wireshark-qt alacritty yq ripgrep rng-tools jq
+    terminator wireshark-qt alacritty yq ripgrep rng-tools jq starship
 }
 
 directory_setup() {
@@ -78,10 +78,52 @@ scripts_setup() {
   cp -r scripts/ "$HOME/.config/"
 }
 
+kube_install() {
+
+  sudo apt-get install -y apt-transport-https ca-certificates curl gnupg software-properties-common
+
+  curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+  sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
+
+  sudo apt-get update
+
+  sudo apt-get install -y kubectl
+}
+
+tf_install() {
+
+  wget -O- https://apt.releases.hashicorp.com/gpg |
+    gpg --dearmor |
+    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null
+
+  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+  sudo apt update
+
+  sudo apt-get install terraform
+}
+
 neovim_install() {
   mv ~/.config/nvim ~/.config/nvim.bak
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   rm -rf ~/.config/nvim/.git
+
+}
+
+op_install() {
+  curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+    sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg &&
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+    sudo tee /etc/apt/sources.list.d/1password.list &&
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/ &&
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol |
+    sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol &&
+    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22 &&
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc |
+    sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg &&
+    sudo apt update && sudo apt install 1password-cli
 
 }
 
@@ -99,7 +141,11 @@ directory_setup
 dotfiles_install
 miniplug_install
 scripts_setup
+aws_install
+kube_install
+tf_install
 neovim_install
+op_install
 aws_install
 
 docker_install() {
