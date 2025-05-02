@@ -141,5 +141,9 @@ curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
+curl -o "$HOME/.local/bin/aws-vault" https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64
+
+chmod +x "$HOME/.local/bin/aws-vault"
+
 systemctl --user --now enable wireplumber.service
 #sudo systemctl enable lightdm && sudo systemctl start lightdm
