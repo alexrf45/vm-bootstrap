@@ -141,4 +141,5 @@ curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
+systemctl --user --now enable wireplumber.service
 #sudo systemctl enable lightdm && sudo systemctl start lightdm
