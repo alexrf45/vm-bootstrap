@@ -8,7 +8,7 @@ base_desktop_install() {
   sudo apt install lightdm lightdm-gtk-greeter i3-wm i3blocks \
     i3lock i3blocks i3status dmenu feh man-db flameshot curl wget papirus-icon-theme picom rofi rtkit alsa-utils \
     thermald fonts-anonymous-pro fonts-jetbrains-mono \
-    powerline network-manager-applet xterm xsel speech-dispatcher \
+    pipewire-audio powerline network-manager-applet xterm xsel speech-dispatcher \
     gvfs openvpn open-vm-tools pavucontrol zsh gnupg2 \
     pass paprefs inotify-tools notification-daemon bluez \
     just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
@@ -38,7 +38,7 @@ directory_setup() {
   mkdir -p "$HOME/.docker"
 
   mkdir -p "$HOME/.logs"
-  
+
   mkdir -p "$HOME/.downloads"
 
 }
