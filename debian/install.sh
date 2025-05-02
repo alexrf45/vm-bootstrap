@@ -6,15 +6,15 @@ echo -e "Installing base packages..."
 
 base_desktop_install() {
   sudo apt install lightdm lightdm-gtk-greeter i3-wm i3blocks \
-    i3lock i3status dmenu feh man-db flameshot curl wget papirus-icon-theme picom rofi rtkit alsa-utils \
-    pipewire thermald fonts-anonymous-pro fonts-jetbrains-mono \
+    i3lock i3blocks i3status dmenu feh man-db flameshot curl wget papirus-icon-theme picom rofi rtkit alsa-utils \
+    thermald fonts-anonymous-pro fonts-jetbrains-mono \
     powerline network-manager-applet xterm xsel speech-dispatcher \
-    gvfs openvpn open-vm-tools pavucontrol \
-    pass paprefs inotify-tools notification-daemon bluez xfce4-notifyd \
+    gvfs openvpn open-vm-tools pavucontrol zsh gnupg2 \
+    pass paprefs inotify-tools notification-daemon bluez \
     just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
     gzip p7zip lolcat btop cowsay figlet rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
     ueberzug thunar sqlitebrowser sqlite3 syncthing python3 python3-pip python3-requests python3-virtualenv pipx remmina \
-    terminator alacritty yq ripgrep rng-tools jq starship age
+    terminator alacritty yq ripgrep rng-tools jq starship age neovim
 
 }
 
@@ -37,6 +37,8 @@ directory_setup() {
 
   mkdir -p "$HOME/.docker"
 
+  mkdir -p "$HOME/.logs"
+  
   mkdir -p "$HOME/.downloads"
 
 }
@@ -57,7 +59,7 @@ miniplug_install() {
 
 }
 scripts_setup() {
-  cp -r scripts/ "$HOME/.config/"
+  cp -r ../arch/scripts/ "$HOME/.config/"
 }
 
 kube_install() {
@@ -115,14 +117,14 @@ aws_install() {
   sudo ./aws/install && rm -r aws/
 }
 
-base_desktop_install
-directory_setup
-dotfiles_install
-miniplug_install
-scripts_setup
-aws_install
-kube_install
-tf_install
+#base_desktop_install
+#directory_setup
+#dotfiles_install
+#miniplug_install
+#scripts_setup
+#aws_install
+#kube_install
+#tf_install
 neovim_install
 op_install
 
@@ -139,4 +141,4 @@ curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
-sudo systemctl enable lightdm && sudo systemctl start lightdm
+#sudo systemctl enable lightdm && sudo systemctl start lightdm
