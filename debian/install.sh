@@ -131,8 +131,16 @@ docker_install() {
   sh get-docker.sh
 }
 
+sops_install() {
+  curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
+  sudo mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops
+  sudo chmod +x /usr/local/bin/sops
+
+}
+
 docker_install
 
+sops_install
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -fsS https://dl.brave.com/install.sh | sh
