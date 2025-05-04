@@ -147,4 +147,8 @@ curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
+sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
+
+sudo cp skull.jpg /usr/share/pixmaps/skull.jpg
+
 sudo systemctl enable lightdm && sudo systemctl start lightdm
