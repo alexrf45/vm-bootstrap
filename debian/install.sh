@@ -133,17 +133,24 @@ docker_install() {
   sh get-docker.sh
 }
 
+sops_install() {
+  curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
+  sudo mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops
+  sudo chmod +x /usr/local/bin/sops
+
+}
+
 docker_install
 
+sops_install
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
-curl -o "$HOME/.local/bin/aws-vault" https://github.com/99designs/aws-vault/releases/download/v7.2.0/aws-vault-linux-amd64
+sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
-chmod +x "$HOME/.local/bin/aws-vault"
+sudo cp skull.jpg /usr/share/pixmaps/skull.jpg
 
-systemctl --user --now enable wireplumber.service
-#sudo systemctl enable lightdm && sudo systemctl start lightdm
+sudo systemctl enable lightdm && sudo systemctl start lightdm
