@@ -119,7 +119,7 @@ sudo systemctl start docker && sudo systemctl enable docker
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-#curl -fsS https://dl.brave.com/install.sh | sh
+curl -fsS https://dl.brave.com/install.sh | sh
 
 sudo usermod -aG docker "$USER"
 
