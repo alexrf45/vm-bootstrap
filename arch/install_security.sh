@@ -34,10 +34,10 @@ base_tools_install() {
 base_tools_1_install() {
 
   sudo pacman -S aws-vault docker \
-    docker-compose docker-buildx jq neovim npm obsidian \
+    docker-compose docker-buildx jq neovim npm \
     python python-pip python-requests python-virtualenv python-pipx remmina \
     terminator wireshark-qt alacritty yq ripgrep rng-tools \
-    mkcert k9s argon2 age direnv talosctl helm terraform kubectl sops
+    mkcert k9s argon2 age direnv helm terraform kubectl sops
 }
 
 directory_setup() {
@@ -125,6 +125,6 @@ sudo usermod -aG docker "$USER"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-yay -S zen-browser-bin google-chrome
+yay -S google-chrome
 
 sudo systemctl enable lightdm && sudo systemctl start lightdm
