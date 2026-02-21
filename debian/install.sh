@@ -58,9 +58,6 @@ miniplug_install() {
     -o "$HOME/.miniplug/plugins/miniplug.zsh"
 
 }
-scripts_setup() {
-  cp -r ../arch/scripts/ "$HOME/.config/"
-}
 
 kube_install() {
 
@@ -117,14 +114,14 @@ aws_install() {
   sudo ./aws/install && rm -r aws/
 }
 
-#base_desktop_install
-#directory_setup
-#dotfiles_install
-#miniplug_install
+base_desktop_install
+directory_setup
+dotfiles_install
+miniplug_install
 #scripts_setup
-#aws_install
+aws_install
 #kube_install
-#tf_install
+tf_install
 neovim_install
 op_install
 
@@ -143,6 +140,7 @@ sops_install() {
 docker_install
 
 sops_install
+
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -fsS https://dl.brave.com/install.sh | sh
