@@ -1,20 +1,27 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-echo -e "Installing base packages..."
+export DEBIAN_FRONTEND=noninteractive
+TARGET_USER="fr3d"
+
+echo "============================================"
+echo "[$(date)] First-boot setup starting..."
+echo "============================================"
 
 base_desktop_install() {
   sudo apt install lightdm lightdm-gtk-greeter i3-wm i3blocks \
-    i3lock i3blocks i3status dmenu feh man-db flameshot curl wget papirus-icon-theme picom rofi rtkit alsa-utils \
-    thermald fonts-anonymous-pro fonts-jetbrains-mono \
+    i3lock i3blocks i3status dmenu feh man-db flameshot \
+    curl wget papirus-icon-theme picom \
+    rofi rtkit alsa-utils thermald fonts-anonymous-pro \
     pipewire-audio powerline network-manager-applet xterm xsel speech-dispatcher \
     gvfs openvpn open-vm-tools pavucontrol zsh gnupg2 \
     pass paprefs inotify-tools notification-daemon bluez \
-    just lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
-    gzip p7zip lolcat btop cowsay figlet rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
-    ueberzug thunar sqlitebrowser sqlite3 syncthing python3 python3-pip python3-requests python3-virtualenv pipx remmina \
-    terminator alacritty yq ripgrep rng-tools jq starship age neovim
+    lazygit links ffmpeg rsync upx wget tmux tmuxp unzip \
+    gzip p7zip rng-tools bash-completion zathura zathura-pdf-poppler poppler-data \
+    ueberzug thunar sqlitebrowser sqlite3 python3 python3-pip \
+    python3-requests python3-virtualenv pipx remmina \
+    terminator alacritty yq ripgrep jq age neovim
 
 }
 
@@ -42,6 +49,16 @@ directory_setup() {
   mkdir -p "$HOME/.downloads"
 
 }
+
+mkdir -p ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Iosevka.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
+
+unzip Iosevka.zip -d ~/.local/share/fonts/
+unzip JetBrainsMono.zip -d ~/.local/share/fonts/
+
+fc-cache -fv
 
 dotfiles_install() {
   rm "$HOME/.bashrc" "$HOME/.profile"
@@ -116,7 +133,7 @@ aws_install() {
 
 base_desktop_install
 directory_setup
-dotfiles_install
+#dotfiles_install
 miniplug_install
 #scripts_setup
 aws_install
@@ -125,27 +142,46 @@ tf_install
 neovim_install
 op_install
 
-docker_install() {
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sh get-docker.sh
-}
+echo "[*] Installing Docker Engine..."
 
-sops_install() {
-  curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64
-  sudo mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops
+if ! command -v docker &>/dev/null; then
+  curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+  sh /tmp/get-docker.sh
+  rm -f /tmp/get-docker.sh
+  sudo usermod -aG docker "$TARGET_USER"
+
+  systemctl enable docker
+  systemctl restart docker
+  echo "[+] Docker installed and hardened."
+else
+  echo "[=] Docker already installed, skipping."
+fi
+
+echo "[*] Installing Lazygit..."
+if ! command -v lazygit &>/dev/null; then
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf /tmp/lazygit.tar.gz -C /tmp lazygit
+  sudo install /tmp/lazygit /usr/local/bin/lazygit
+  rm -f /tmp/lazygit /tmp/lazygit.tar.gz
+  echo "[+] Lazygit ${LAZYGIT_VERSION} installed."
+else
+  echo "[=] Lazygit already installed, skipping."
+fi
+
+echo "[*] Installing SOPS..."
+if ! command -v sops &>/dev/null; then
+  SOPS_VERSION=$(curl -s "https://api.github.com/repos/getsops/sops/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
+  curl -Lo /usr/local/bin/sops "https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64"
   sudo chmod +x /usr/local/bin/sops
-
-}
-
-docker_install
-
-sops_install
+  echo "[+] SOPS ${SOPS_VERSION} installed."
+else
+  echo "[=] SOPS already installed, skipping."
+fi
 
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 curl -fsS https://dl.brave.com/install.sh | sh
-
-sudo usermod -aG docker "$USER"
 
 sudo cp lightdm-gtk-greeter.conf /etc/lightdm/.
 
